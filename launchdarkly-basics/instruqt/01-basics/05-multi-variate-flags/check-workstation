@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# This script runs when the platform check the challenge.
+#
+# The platform determines if the script was successful using the exit code of this
+# script. If the exit code is not 0, the script fails. 
+#
+
+echo "This is the check script"
+
+
+FLAG_NAME=$(curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/flags/launch-darkly-basics/background-color' \
+  -H 'Authorization: '${LD_API_KEY}'' | jq -r .name)
+
+if [ -z "$FLAG_NAME" ]; then
+    fail-message "Your flag was not created correctly."
+    exit 1
+fi
+
+exit 0

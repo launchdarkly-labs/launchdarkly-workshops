@@ -1,0 +1,24 @@
+#!/bin/bash
+
+source /root/apikey
+
+FLAG_NAME=$(curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/flags/launch-darkly-basics/enable-auto-rotate' \
+  -H 'Authorization: '${LD_API_KEY}'' | jq -r .name)
+
+if [ -z "$FLAG_NAME" ]; then
+    curl -i -X POST \
+    'https://app.launchdarkly.com/api/v2/flags/launch-darkly-basics' \
+    -H 'Authorization: '${LD_API_KEY}'' \
+    -H 'Content-Type: application/json' \
+    -d '{
+        "clientSideAvailability": {
+            "usingEnvironmentId": true,
+            "usingMobileKey": false
+        },
+        "key": "enable-auto-rotate",
+        "name": "Enable Auto Rotate"
+    }'
+fi
+
+exit 0

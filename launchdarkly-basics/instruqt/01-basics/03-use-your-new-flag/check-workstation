@@ -1,0 +1,42 @@
+#!/bin/sh
+#
+# This script runs when the platform check the challenge.
+#
+# The platform determines if the script was successful using the exit code of this
+# script. If the exit code is not 0, the script fails. 
+#
+
+source /root/apikey
+
+
+CHECK_CONTEXT=$(cat /root/launchdogly/static/main.js | sed -n '/^const context/p')
+if [ -z "$CHECK_CONTEXT" ]; then
+    fail-message "Please make sure you add the `const context` code block"
+    exit 1
+fi
+
+CHECK_NAME=$(cat /root/launchdogly/static/main.js | sed -n '/YOUR_NAME/p')
+if [ -z "$CHECK_NAME" ]; then
+    fail-message "Make sure to replace `YOUR_NAME` with your name"
+    exit 1
+fi
+
+CHECK_STATE=$(cat /root/launchdogly/static/main.js | sed -n '/YOUR_STATE/p')
+if [ -z "$CHECK_STATE" ]; then
+    fail-message "Make sure to replace `YOUR_STATE` with your state"
+    exit 1
+fi
+
+CHECK_CONTEXT=$(cat /root/launchdogly/static/main.js | sed -n '/^const client/p')
+if [ -z "$CHECK_CONTEXT" ]; then
+    fail-message "It appears you're missing the client initialization block"
+    exit 1
+fi
+
+CHECK_CONTEXT=$(cat /root/launchdogly/static/main.js | sed -n '/^client\.on/p')
+if [ -z "$CHECK_CONTEXT" ]; then
+    fail-message "Uh-oh, you're missing the ready listener for the client object"
+    exit 1
+fi
+
+exit 0

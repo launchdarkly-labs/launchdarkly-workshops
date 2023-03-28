@@ -1,0 +1,17 @@
+slug: launchdarkly-basics
+id: uzaoweagm1xx
+title: LaunchDarkly Basics
+teaser: Introduction to LaunchDarkly
+description: |-
+  This track is an example of what LaunchDarkly
+  can do for workshops.
+icon: https://launchdarkly.com/favicon-dark-mode.png
+tags: []
+owner: launchdarkly
+developers:
+- kcochran@launchdarkly.com
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+checksum: "13193752121835706540"

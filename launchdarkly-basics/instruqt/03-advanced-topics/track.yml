@@ -1,0 +1,14 @@
+slug: launchdarkly-advanced-topics
+id: zcjr46m3fp1y
+title: LaunchDarkly Advanced Topics
+teaser: A brief look into the more powerful features of LaunchDarkly
+description: |-
+  Feature flagging provides a great deal of flexibility
+  on its own. Couple that with a powerful, enterprise-grade
+  platform, and the possibilities are limitless!
+icon: https://storage.googleapis.com/instruqt-frontend/img/tracks/default.png
+tags: []
+owner: launchdarkly
+developers:
+- kcochran@launchdarkly.com
+checksum: "15037461368816471167"

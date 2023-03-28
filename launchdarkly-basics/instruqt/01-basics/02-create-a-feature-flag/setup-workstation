@@ -1,0 +1,10 @@
+#!/bin/bash
+
+source /root/apikey
+
+CLIENT_KEY=$(curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/projects/launch-darkly-basics/environments/test' \
+  -H 'Authorization: '${LD_API_KEY}'' | jq -r ._id)
+echo "export CLIENT_KEY=${CLIENT_KEY}" >> /root/apikey
+
+echo "var clientKey = \"${CLIENT_KEY}\";" > /root/launchdogly/track1/static/keys.js

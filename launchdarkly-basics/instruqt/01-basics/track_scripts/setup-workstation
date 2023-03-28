@@ -1,0 +1,55 @@
+#!/bin/bash
+
+set -euo pipefail
+
+until [ -f /opt/instruqt/bootstrap/host-bootstrap-completed ]; do
+    echo "Waiting for instruqt bootstrap to complete"
+    sleep 1
+done
+
+apt-get -y update
+
+apt-get -y install jq pip
+
+ln -s /usr/bin/python3 /usr/bin/python
+
+pip install launchdarkly-server-sdk flask flask_cors
+
+echo "export LD_API_KEY=api-503dd436-920a-4380-9e66-8c2af6bb327e" > /root/apikey
+
+# Cat with >> will append, not overwrite
+cat >> /root/.bashrc <<-EOF
+  source /root/apikey
+
+EOF
+
+# clone our code repo
+mkdir -p /opt/ld
+mkdir -p /root/launchdogly
+cd /opt/ld
+git clone https://github.com/kevincloud/launchdogly.git
+cd /opt/ld/launchdogly/track1
+cp -R * /root/launchdogly
+rm -rf /root/launchdogly/solve
+cd /root
+
+# Create Code Server startup script
+cat <<-EOF > /etc/systemd/system/launchdogly.service
+[Unit]
+Description=LaunchDogly App
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+WorkingDirectory=/root/launchdogly
+ExecStart=/usr/bin/python /root/launchdogly/app.py
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Start Code Server
+systemctl enable launchdogly
+systemctl start launchdogly

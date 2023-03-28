@@ -1,0 +1,41 @@
+#!/bin/sh
+#
+# This script runs when the platform setup the challenge.
+#
+# The platform determines if the script was successful using the exit code of this
+# script. If the exit code is not 0, the script fails. 
+#
+
+echo "This is the setup script"
+
+exit 0
+
+# Use API to clear individual targeting
+TMPVARS=$(curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/flags/launch-darkly-basics/background-color' \
+  -H 'Authorization: '${LD_API_KEY}'' | jq -r '.variations[]._id')
+while CVAR= read -r MYLINE; do
+  curl -s -X PATCH \
+    'https://app.launchdarkly.com/api/v2/flags/launch-darkly-basics/background-color' \
+    -H 'Authorization: '${LD_API_KEY}'' \
+    -H 'Content-Type: application/json; domain-model=launchdarkly.semanticpatch' \
+    -d '{
+      "environmentKey": "test",
+      "instructions": [ { "kind": "clearUserTargets", "variationId": "'$MYLINE'" } ]
+    }'
+done <<< "$TMPVARS"
+
+# Create a new flag
+curl -i -X POST \
+  'https://app.launchdarkly.com/api/v2/flags/launch-darkly-basics' \
+  -H 'Authorization: '${LD_API_KEY}'' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "clientSideAvailability": {
+      "usingEnvironmentId": true,
+      "usingMobileKey": false
+    },
+    "key": "new-app-name",
+    "name": "New App Name"
+  }'
+  
