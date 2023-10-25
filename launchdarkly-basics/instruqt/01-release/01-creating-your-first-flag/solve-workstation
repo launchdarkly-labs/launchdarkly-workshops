@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd /opt/ld/instruqt-release-solve/challenge-01
+
+terraform apply -auto-approve
+
+exit 0

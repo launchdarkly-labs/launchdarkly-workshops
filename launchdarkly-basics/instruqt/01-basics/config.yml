@@ -1,9 +1,0 @@
-version: "3"
-virtualbrowsers:
-- name: launchdarkly
-  url: https://app.launchdarkly.com
-virtualmachines:
-- name: workstation
-  image: ubuntu-os-cloud/ubuntu-2204-lts
-  shell: /bin/bash
-  machine_type: n1-standard-1

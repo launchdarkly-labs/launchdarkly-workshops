@@ -1,0 +1,23 @@
+slug: risk-free-releases
+id: apk1xxhtw40m
+title: Release!
+teaser: Release features and migrate with little to no risk
+description: |-
+  Releases always carry some risk, but why does it need to
+  be anything more than negligible? In this track, you'll
+  learn how your releases can not only carry little to no
+  risk, but you'll learn how having ultimate control over
+  your releases will give you and your customers confidence
+  with every new feature!
+icon: https://launchdarkly.com/favicon-dark-mode.png
+tags:
+- release
+- migrate
+owner: launchdarkly
+developers:
+- kcochran@launchdarkly.com
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+checksum: "10920903427897624970"

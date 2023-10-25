@@ -1,4 +1,0 @@
-#!/bin/bash
-
-cd /opt/ld/launchdogly/track1/solve
-cat main-start.js main-03.js main-end.js > /root/launchdogly/static/main.js

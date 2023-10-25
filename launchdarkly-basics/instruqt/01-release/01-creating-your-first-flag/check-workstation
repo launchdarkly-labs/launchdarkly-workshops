@@ -1,0 +1,51 @@
+#!/bin/sh
+
+FLAG_DATA=$(curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/flags/'${LD_PROJECT_KEY}'/storeEnabled' \
+  -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'')
+
+FLAG_KEY=$(echo ${FLAG_DATA} | jq -r .code)
+FLAG_NAME=$(echo ${FLAG_DATA} | jq -r .name)
+FLAG_KIND=$(echo ${FLAG_DATA} | jq -r .kind)
+FLAG_SDK=$(echo ${FLAG_DATA} | jq -r .clientSideAvailability.usingEnvironmentId)
+FLAG_V1=$(echo ${FLAG_DATA} | jq -r '.variations[0].name')
+FLAG_V2=$(echo ${FLAG_DATA} | jq -r '.variations[1].name')
+
+if [ "$FLAG_KEY" != "null" ]; then 
+    fail-message "Your flag was not created correctly. The **key** is incorrect. You will need to create a new flag exactly as shown in the instructions."
+    exit 1
+fi
+
+ERRORS="false"
+
+if [ "$FLAG_NAME" != "Release Toggle Outfitters Updated Storefront" ]; then 
+    ERROR_1="* The name of the flag is incorrect\n"
+    ERRORS="true"
+fi
+
+if [ "$FLAG_KIND" != "boolean" ]; then 
+    ERROR_2="* Select the correct flag type (boolean)\n"
+    ERRORS="true"
+fi
+
+if [ "$FLAG_SDK" != "true" ]; then 
+    ERROR_3="* The **SDKs using Client-side ID** box is not checked.\n"
+    ERRORS="true"
+fi
+
+if [ "$FLAG_V1" != "Store Enabled" ]; then 
+    ERROR_4="* The **Name** for the **true** variation is incorrect.\n"
+    ERRORS="true"
+fi
+
+if [ "$FLAG_V2" != "Store Disabled" ]; then 
+    ERROR_5="* The **Name** for the **false** variation is incorrect.\n"
+    ERRORS="true"
+fi
+
+if [ "$ERRORS" = "true" ]; then
+    fail-message "Please correct the following errors:\n${ERROR_1}${ERROR_2}${ERROR_3}${ERROR_4}${ERROR_5}"
+    exit 1
+fi
+
+exit 0
