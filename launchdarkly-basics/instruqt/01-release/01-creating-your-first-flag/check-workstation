@@ -44,7 +44,7 @@ if [ "$FLAG_V2" != "Store Disabled" ]; then
 fi
 
 if [ "$ERRORS" = "true" ]; then
-    fail-message "Please correct the following errors:\n${ERROR_1}${ERROR_2}${ERROR_3}${ERROR_4}${ERROR_5}"
+    fail-message "Please correct the following errors:\n"${ERROR_1}${ERROR_2}${ERROR_3}${ERROR_4}${ERROR_5}
     exit 1
 fi
 

@@ -67,13 +67,19 @@ Now let's update our feature flag from Challenge 1 to use our new segment.
 
 1. Click **Feature Flags** in the left mavigation menu.
 1. Click **Release Toggle Outfitters Updated Storefront**.
-1. Scroll down to the **Rules** section, and click **+ Add rules**.
+1. In the **Quick start** section, select *Target individuals*
+1. Scroll toward the bottom and click **+Add rule** and choose **Custom**
 1. Select the following values:
-   1. **Context kind**: is in segment
-   1. **Values**: Developers
-   1. **SERVE --> Rollout**: Store Enabled
-1. In the **Default rule** section, select the following value:
-   1. **SERVE --> Rollout**: Store Disabled
+   1. **Context kind**: user
+   1. **Attribute**: name
+   1. **Operator**: is one of
+   1. **Values**:
+      1. ron \<Enter\>
+      1. leslie \<Enter\>
+      1. april \<Enter\>
+   1. **Rollout**: Store Enabled
+1. In the **Default rule** section, click the pencil in the right side of the heading:
+   1. **SERVE --> Variation**: Store Disabled
 1. Click the On/Off toggle at the top left of the panel to turn the flag **On**.
 1. Click **Review and save**, then **Save changes**.
 

@@ -41,31 +41,17 @@ First, we need to create a feature flag. This flag won't do much right now, but 
 
 1. From the left-hand navigation menu, click **Feature Flags**
 1. Click the **Create flag** button in the upper right-hand corner
-1. Enter the following information for the new flag:
-
-**Name**:
-```js
-Release Toggle Outfitters Updated Storefront
-```
-**Key**:
-```js
-storeEnabled
-```
-**Client-side SDK availability**:
-> Check the **SDKs using Client-side ID** box
-
-**Flag variations**:
-> Select **Boolean**
-
-**Variation 1** Name:
-```js
-Store Enabled
-```
-**Variation 2** Name:
-```js
-Store Disabled
-```
-
-Scroll to the bottom of the panel and click **Save flag**
+1. Select **Release**, then click **Next**
+1. For **Name**, enter `Release Toggle Outfitters Updated Storefront`
+1. For **Key**:
+   1. Click the pencil
+   1. Enter `storeEnabled`
+   1. Click **Next**
+1. For **Flag variations**:
+   1. Select **Boolean**
+   1. For the first **Name**, enter `Store Enabled`
+   1. For the second **Name**, enter `Store Disabled`
+1. Click **Advanced configuration**, and check the **SDKs using Client-side ID** box
+1. Click **Create flag**
 
 Congratulations! You've created your first flag and you're ready to proceed to the next challenge!
