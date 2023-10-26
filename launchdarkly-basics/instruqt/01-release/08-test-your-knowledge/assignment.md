@@ -13,7 +13,7 @@ answers:
 - Enable targeting
 - Set up an experiment
 solution:
-- 3
+- 2
 difficulty: basic
 timelimit: 600
 ---
