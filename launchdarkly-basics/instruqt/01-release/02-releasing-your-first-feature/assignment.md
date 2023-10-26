@@ -59,16 +59,19 @@ const {storeEnabled} = useFlags();
 
 **Step 4:** Save the file
 
-If you did it correctly, you should see no change on our page, why? Well because we haven't enabled the flag. This is what we mean by testing in production. The code is currently in place, but its dsiabled behind our feature flag.
+Switch to the [Toggle Outfitters](#tab-1) tab, and you should see no change on our page, why? Well because we haven't enabled the flag. This is what we mean by testing in production. The code is currently in place, but its disabled behind our feature flag.
 
 # Flags in Action
 
-Switch to the [LaunchDarkly](#tab-0) tab and turn the flag **on**.
-
-Now switch to the [Toggle Outfitters](#tab-1) tab and you should see our new brand new webstore!
+1. Switch to the [LaunchDarkly](#tab-0) tab.
+1. Click the On/Off toggle to turn the flag **On**.
+1. Click **Review and save**, then **Save changes**.
+1. Now switch to the [Toggle Outfitters](#tab-1) tab and you should see our new brand new webstore!
 
 While this is great, and we can disable it immediately if there are any issues, we want to be able to test this with a small group of users before we release it to everyone.
 
-Switch back to the [LaunchDarkly](#tab-0) tab and turn the flag **off**.
+1. Switch to the [LaunchDarkly](#tab-0) tab.
+1. Click the On/Off toggle to turn the flag **Off**.
+1. Click **Review and save**, then **Save changes**.
 
 Great job! You've successfully added a LaunchDarkly feature flag to our application!

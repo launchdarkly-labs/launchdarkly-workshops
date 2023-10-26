@@ -46,11 +46,15 @@ First, we need to create a feature flag. This flag won't do much right now, but 
 1. For **Key**:
    1. Click the pencil
    1. Enter `storeEnabled`
+   1. Click the **blue** checkmark to the right
    1. Click **Next**
 1. For **Flag variations**:
    1. Select **Boolean**
-   1. For the first **Name**, enter `Store Enabled`
-   1. For the second **Name**, enter `Store Disabled`
+   1. First **Name**: `Store Enabled`
+   1. Second **Name**: `Store Disabled`
+1. For **Default variations**:
+   1. **Serve when targeting is ON**: *Store Enabled*
+   1. **Serve when targeting is OFF**: *Store Disabled*
 1. Click **Advanced configuration**, and check the **SDKs using Client-side ID** box
 1. Click **Create flag**
 

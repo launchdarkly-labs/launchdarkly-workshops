@@ -105,7 +105,7 @@ export default useErrorHandling;
 # Update Flag Settings
 
 1. Switch over to the [LaunchDarkly](#tab-0) tab.
-1. Click **Feature Flags** in the left mavigation menu.
+1. Click **Feature Flags** in the left navigation menu.
 1. Click **Updated Billing IU**.
 1. In the upper navigation menu, click **Settings**
 1. In the **Triggers** section, click **+ Add trigger**
@@ -126,10 +126,11 @@ export default useErrorHandling;
 With our trigger in place, let's reproduce the error we encountered in our fourth challenge.
 
 1. Switch back over to the [LaunchDarkly](#tab-0) tab.
-1. Click **Feature Flags** in the left mavigation menu.
+1. Click **Feature Flags** in the left navigation menu.
 1. Locate the **Migrate to Stripe API** flag and toggle the flag to **Off**
 1. Click **Save changes**
 1. Finally, switch over to the [Toggle Outfitters](#tab-1) tab.
+1. Login as **ron**, **leslie**, or **april**
 1. Click *Add to Cart*
 
 You'll see the error like we did in Challenge 4, except when you dismiss the error this time, you can see the error UI changes were reverted.

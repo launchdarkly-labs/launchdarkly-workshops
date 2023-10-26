@@ -48,11 +48,12 @@ We'll create a new flag to handle our new billing user interface:
 1. For **Key**:
    1. Click the pencil
    1. Enter `billing`
+   1. Click the **blue** checkmark to the right
    1. Click **Next**
 1. For **Flag variations**:
    1. Select **Boolean**
-   1. For the first **Name**, enter `Enable Stripe`
-   1. For the second **Name**, enter `Self-hosted Form`
+   1. First **Name**: `Enable Stripe`
+   1. Second **Name**: `Self-hosted Form`
 1. For **Default variations**, select *Self-hosted Form* for both **ON** and **OFF**
 1. Click **Advanced configuration**, and check the **SDKs using Client-side ID** box
 1. Click **Create flag**
@@ -62,18 +63,18 @@ The settings we've created for this flag will prevent our new feature from being
 1. In the **Quick start** section, select *Target segments*
 1. From the **Segments** dropdown, select *Developers*
 1. From the **Rollout** dropdown, select *Enable Stripe*
-1. Toggle the flag **On** in the upper left
+1. Toggle the On/Off flag to **On** in the upper left
 1. Click **Review and save**, then **Save changes**
 
 
 Next: Add the Code
 ===
 
-Within our application, we need to implement the new feature that will be controlled via this `billing`` feature flag.
+Within our application, we need to implement the new feature that will be controlled via this **Updated Billing UI** feature flag.
 
 **Step 1:** Open the [Code Editor](#tab-2), and locate the `/src/components/inventory.tsx` file.
 
-**Step 2:** Scroll to close to the bottom of the file and locate the `\<ReserveButton /\>` object. Replace the entire `\<ReserveButton /\>` code with the following:
+**Step 2:** Scroll to close to the bottom of the file and locate the `\<ReserveButton /\>` object, around line 131. Replace the entire `\<ReserveButton /\>` code with the following:
 
 ```js
 {
@@ -103,7 +104,7 @@ Within our application, we need to implement the new feature that will be contro
 
 After saving the file, we're ready to test this new feature!
 
-**Step 3:** Switch over the the [Toggle Outfitters](#tab-1) tab, and if you're still logged in, you will see the **Reserve Yours** button has changed to **Add to cart**.
+**Step 3:** Switch over the the [Toggle Outfitters](#tab-1) tab. Login as **ron**, **leslie**, or **april**, you will see the **Reserve Yours** button has changed to **Add to cart**.
 
 Verify only developers can see the new functionality by logging out. Then log back in as **ron**, **leslie**, or **april**.
 
@@ -117,8 +118,8 @@ Whoops! It looks like there's an error in our system.
 Unfortunately, buggy code sometimes makes it's way into production no matter how much you test. In traditional software delivery scenarios, if the bug is bad enough, this is a rollback or redeployment moment. Then it's sitting for a few hours hoping that rollback pipeline is successful. With LaunchDarkly, we can recover from this failure in seconds.
 
 1. Go back to the [LaunchDarkly](#tab-0) tab.
-1. Navigate to the Feature Flags, and toggle the **Updated Billing UI** flag to **Off**.
-1. Click **Save changes**
+1. Toggle the On/Off flag to **Off** in the upper left
+1. Click **Review and save**, then **Save changes**
 
 Review the [Toggle Outfitters](#tab-1) site once more, and even though you're logged in as a developer, we can no longer see the new **Add to Cart** function since the entire feature is now off.
 
