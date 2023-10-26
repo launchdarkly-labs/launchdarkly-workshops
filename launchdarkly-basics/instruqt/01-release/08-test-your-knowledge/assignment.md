@@ -4,6 +4,9 @@ id: szgihn4pzwqo
 type: quiz
 title: Test Your Knowledge
 teaser: Test Your Knowledge
+notes:
+- type: text
+  contents: We've covered a lot, so let stop for a moment and test your knowledge.
 answers:
 - Create a prerequisite
 - Use a flag trigger
