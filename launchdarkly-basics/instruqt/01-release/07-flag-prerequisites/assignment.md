@@ -1,5 +1,6 @@
 ---
 slug: flag-prerequisites
+id: 92jkin18ky9g
 type: challenge
 title: Flag Prerequisites
 teaser: Avoid flag dependency issues by setting up Prerequisites

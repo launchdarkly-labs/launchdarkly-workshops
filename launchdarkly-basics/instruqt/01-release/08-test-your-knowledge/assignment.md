@@ -1,5 +1,6 @@
 ---
 slug: test-your-knowledge
+id: szgihn4pzwqo
 type: quiz
 title: Test Your Knowledge
 teaser: Test Your Knowledge

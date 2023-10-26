@@ -1,5 +1,6 @@
 ---
 slug: migrate-technologies
+id: vuvyprvoibhk
 type: challenge
 title: Migrating Technologies with LaunchDarkly
 teaser: Reduce your migration risks using feature flags
@@ -65,8 +66,8 @@ To complete our migration and ship the new API, we need to update our code to en
 
 **Step 2:** Replace lines 47-52 with the following code:
 ```js
-//in this code, we are first retrieving the value for the enableStripe flag, 
-// then, if it returns true, running a function that creates a checkout session in stripe. 
+//in this code, we are first retrieving the value for the enableStripe flag,
+// then, if it returns true, running a function that creates a checkout session in stripe.
 //If you want to see how that works, take a look at the `/src/utils/checkout-helpers.ts` file.
 
   if (req.method === 'POST') {
@@ -77,7 +78,7 @@ To complete our migration and ship the new API, we need to update our code to en
     }
   } if (req.method === 'GET') {
     const enableStripe = await ldClient.variation("enableStripe", jsonObject, false);
-  
+
     if (enableStripe) {
       try {
         res.send("You are good to go!");

@@ -1,5 +1,6 @@
 ---
 slug: automatic-error-resolution
+id: 7lrel1okxjhy
 type: challenge
 title: Automatic Error Resolution
 teaser: Learn how to automate error resolution with flag triggers
@@ -58,7 +59,7 @@ const useErrorHandling = () => {
   const Trigger = async () => {
     try {
       const response = await fetch(
-        triggerUrl,  
+        triggerUrl,
         {
           method: "POST",
           body: JSON.stringify({
