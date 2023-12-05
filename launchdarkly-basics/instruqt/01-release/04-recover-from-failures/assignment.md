@@ -97,7 +97,6 @@ Within our application, we need to implement the new feature that will be contro
   )
 }
 ```
-
 3. Save the file (^+S or ⌘+S, though it should autosave)
 
 Switch over the the [Toggle Outfitters](#tab-1) tab. Login as **ron**, **leslie**, **april**, or **andy**, and you will see the **Reserve Yours** button has changed to **Add to cart**.
