@@ -6,10 +6,10 @@ title: Controlling Risk with Release Targeting
 teaser: Getting changes to users without action on their part.
 notes:
 - type: text
-  contents: We've shown how you can release features instantly to your users by placing
-    the feature behind a flag, giving you the ability to enable to disable in less
-    than 200ms - but if theres an issue with the code, it's still going to be visible
-    to all of our users. So let's fix that using release targeting!
+  contents: You've seen how to quickly you can release new features, delivering them in
+    less than 200ms. But what happens if there's an issue with the code? We don't want all
+    of our users to see that. So let's provide a way to test in production before a full 
+    release.
 tabs:
 - title: LaunchDarkly
   type: browser
@@ -36,7 +36,7 @@ timelimit: 600
 Create a Segment
 ===
 
-A *segment* is a collection of users, devices, or any other group that share some sort of common attribute.
+A *segment* is a collection of users, devices, or any other group that share some sort of common attribute. By creating a segment, we can provide targeted access to specific features. In our previous challenge, we learned how to turn on and off features in a general way. Now let's reduce our target audience to just our developers.
 
 To get started, switch to the [LaunchDarkly tab](#tab-0), and do the following:
 
@@ -48,7 +48,7 @@ To get started, switch to the [LaunchDarkly tab](#tab-0), and do the following:
 
 Now let's add a rule to make this segment meaningful.
 
-1. In the **Include targets who match these rules** section at the bottom, click **+ Add rules**, then select **Custom**
+1. In the **Include targets who match these rules** section at the bottom, click **+ Add rule**, then select **Custom**
 1. Select the following values:
    1. **Context kind**: user
    1. **Attribute**: name
@@ -57,12 +57,12 @@ Now let's add a rule to make this segment meaningful.
       1. ron *\<Enter\>*
       1. leslie *\<Enter\>*
       1. april *\<Enter\>*
+      1. andy *\<Enter/>*
 1. Click **Save changes**, then **Save changes** again.
 
-The list of **Values** is comprised of arbitrary usernames created for this exercise. In a real environment, this field should contain real usernames from your team members. The usernames are *case-sensitive*, so make sure you take that into consideration when you're creating targeting rules.
+The list of **Values** is comprised of arbitrary usernames created for this exercise. In a real environment, you might use different attributes to identify groups of users in a more dynamic way. The usernames here are *case-sensitive*, so make sure you take that into consideration when you're creating targeting rules.
 
-Next: Test in Production
-===
+# Next: Test in Production
 
 Now let's update our feature flag from Challenge 1 to use our new segment.
 
@@ -82,7 +82,7 @@ Now let's update our feature flag from Challenge 1 to use our new segment.
 Go ahead and navigate back to our [Toggle Outfitters](#tab-1) tab. Even though the flag is on, nothing looks different. That's because a developer isn't logged in!
 
 1. Click **Login** located in the upper, right-hand corner of the Toggle Outfitters site.
-1. Enter **ron**, **leslie**, or **april** for the username.
+1. Enter **ron**, **leslie**, **april**, or **andy** for the username.
 1. Leave the password blank and click **Submit**.
 
 Once logged in successfully, you will see your brand new webstore!

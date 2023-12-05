@@ -34,22 +34,23 @@ timelimit: 1200
 
 # Dark-Launching our Feature
 
-Now that we've successfully created our flag, we are ready to use that flag to launch our new feature. In order to release a feature with LaunchDarkly there are two things we need to do:
+Now that we've successfully created our flag, we are ready to use that flag in our code to launch our new feature. In order to release a feature with LaunchDarkly there are two things we need to do:
 
-1. Import the flag value from LaunchDarkly
-1. Run specific code depending on that value of that flag
+1. Obtain the flag's state from LaunchDarkly.
+1. Determine what code should run based on that flag's state.
 
 # Edit the Code
 
-**Step 1:** Open the [Code Editor](#tab-2), and locate the `/src/pages/index.tsx` file
+The next step is to update our code to make use of our new flag.
 
-**Step 2:** Remove the comments from the start of line 12 (the comments are the // symbols on the front). This will allow the LaunchDarkly SDK to receive the values for this feature flag.
+1. Open the [Code Editor](#tab-2), and locate the `/src/pages/index.tsx` file
+2. Replace line 12 with the following code. This allows the application to start receiving values for our feature flag.
 
 ```js
 const {storeEnabled} = useFlags();
 ```
 
-**Step 3:** Add the following line of code in the appropriate place and save the file. Within our application code - you can see the commented lines around line 26 that indicate where to place this updated code:
+3. Replace line 26 with the following code. This will allow us to control what code gets run based on the state of the flag.
 
 ```js
 {
@@ -57,21 +58,22 @@ const {storeEnabled} = useFlags();
 }
 ```
 
-**Step 4:** Save the file
+4. Save the file (Cmd+S / Ctrl+S)
 
-Switch to the [Toggle Outfitters](#tab-1) tab, and you should see no change on our page, why? Well because we haven't enabled the flag. This is what we mean by testing in production. The code is currently in place, but its disabled behind our feature flag.
+Switch to the [Toggle Outfitters](#tab-1) tab, and you should see no change on our page.Since we haven't turned the flag on, our original preview page is being shown. However, our new code is in place and ready for action!
 
 # Flags in Action
 
 1. Switch to the [LaunchDarkly](#tab-0) tab.
 1. Click the On/Off toggle to turn the flag **On**.
 1. Click **Review and save**, then **Save changes**.
-1. Now switch to the [Toggle Outfitters](#tab-1) tab and you should see our new brand new webstore!
 
-While this is great, and we can disable it immediately if there are any issues, we want to be able to test this with a small group of users before we release it to everyone.
+Switch to the [Toggle Outfitters](#tab-1) tab and now you should see our new brand new online store!
+
+Unfortunately, this code hasn't been tested by our developers, so for now, let's go ahead and turn this flag off for now.
 
 1. Switch to the [LaunchDarkly](#tab-0) tab.
 1. Click the On/Off toggle to turn the flag **Off**.
 1. Click **Review and save**, then **Save changes**.
 
-Great job! You've successfully added a LaunchDarkly feature flag to our application!
+Great job! You've successfully added a LaunchDarkly feature flag to our application! In the next challenge, we'll provide a way for our developers to test the app in production without releasing it to the whole world.

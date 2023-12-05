@@ -1,4 +1,8 @@
 #!/bin/bash
 
-# cd /opt/ld/launchdogly/track1/solve
-# cat main-start.js main-02.js main-end.js > /root/launchdogly/static/main.js
+cd /opt/ld/instruqt-release-solve/challenge-03
+
+terraform apply -auto-approve
+
+exit 0
+

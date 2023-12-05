@@ -1,3 +1,8 @@
 #!/bin/sh
 
+cd /opt/ld/talkin-ship-workshop-app/src/pages
+
+sed -i 's/^.*\/\/ const.*/  const \{ storeEnabled \} \= useFlags\(\)\;/g' index.tsx
+
+sed -i 's/^.*<StorePreview \/>/      \{\n        storeEnabled \? <StoreLaunch \/> \: <StorePreview \/>\n      \}/g' index.tsx
 

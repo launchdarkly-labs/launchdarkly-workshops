@@ -32,19 +32,17 @@ difficulty: basic
 timelimit: 600
 ---
 
-# Immediate Resolution
+# Instant Error Resolution
 
-Unfortunately, issues with technology migrations don't always play nice with work schedules. Usually they wait until the wee hours of the morning or the weekend to have a hiccup and the unfortunate SRE on call has to scramble to take care of the fallout. Does it have to be? As you might have suspected, the answer is, "No, you don't need to wake someone up at 2:00am on a Saturday to take care of a broken API!"
-
-Let's see this in action!
+Now that we completed our migration, our work is not over yet. Sometimes, errors can crop up quite some time after a release, and those errors can occur at the most inconvenient of times. With flag triggers, you can help protect your nights and weekends by automatically rolling back to a previous known good state.
 
 # Update Our Code
 
 First, we need to update our application to take action when something goes wrong. In a production environment, this is normally handled by your monitoring/incident tools. But for simplicity in this lab, we'll have our code handle this for us.
 
-**Step 1:** Open the [Code Editor](#tab-2), and locate the `/src/hooks/useErrorHandling.ts` file.
+1. Open the [Code Editor](#tab-2), and locate the `/src/hooks/useErrorHandling.ts` file.
+2. Replace ALL contents with the following:
 
-**Step 2:** Replace ALL contents with the following:
 ```js
 // hooks/useErrorHandling.ts
 import { useState } from 'react';
@@ -99,8 +97,7 @@ const useErrorHandling = () => {
 
 export default useErrorHandling;
 ```
-
-**Step 3:** Go ahead and save the file, but we're not quite done with it yet. We need to setup the trigger in the flag settings before we come back to it.
+3. Save the file (^+S or ⌘+S, though it should autosave)
 
 # Update Flag Settings
 
@@ -119,7 +116,7 @@ export default useErrorHandling;
 
 1. Switch back over to the [Code Editor](#tab-2) tab.
 1. On line 6, replace `PASTE_URL_TRIGGER_HERE` with the copied URL
-1. Save the file
+1. Save the file (^+S or ⌘+S)
 
 # Testing Our Trigger
 
@@ -130,7 +127,7 @@ With our trigger in place, let's reproduce the error we encountered in our fourt
 1. Locate the **Migrate to Stripe API** flag and toggle the flag to **Off**
 1. Click **Save changes**
 1. Finally, switch over to the [Toggle Outfitters](#tab-1) tab.
-1. Login as **ron**, **leslie**, or **april**
+1. Login as **ron**, **leslie**, **april**, or **andy**.
 1. Click *Add to Cart*
 
 You'll see the error like we did in Challenge 4, except when you dismiss the error this time, you can see the error UI changes were reverted.

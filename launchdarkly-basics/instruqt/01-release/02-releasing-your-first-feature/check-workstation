@@ -1,5 +1,17 @@
 #!/bin/sh
 
-# if grep -q SomeString "$File"; then
-  
-# fi
+cd /opt/ld/talkin-ship-workshop-app/src/pages
+
+LINE1=`grep -n '^.*const.*$' index.tsx | awk '{print $1;}' | cut -b -2`
+if [ "$LINE1" != "12" ]; then
+    fail-message "You must make sure line 12 is uncommented."
+    exit 1
+fi
+
+LINE2=`grep -n '^.*storeEnabled ? <StoreLaunch /> : <StorePreview />.*$' index.tsx | awk '{print $1;}' | cut -b -2`
+if [ -z "$LINE2" ]; then
+    fail-message "The StorePreview code doesn't appear to be present. Please review step 3 in the **Edit the Code** section."
+    exit 1
+fi
+
+

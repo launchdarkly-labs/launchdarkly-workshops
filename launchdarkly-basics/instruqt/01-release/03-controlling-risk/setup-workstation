@@ -1,23 +1,8 @@
 #!/bin/sh
 #
-# This script runs when the platform setup the challenge.
-#
-# The platform determines if the script was successful using the exit code of this
-# script. If the exit code is not 0, the script fails. 
-#
 
-export LD_CLIENT_KEY=$(curl -s -X GET \
-  'https://app.launchdarkly.com/api/v2/projects/'${LD_PROJECT_KEY}'/environments/test' \
-  -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'' | jq -r ._id)
-echo "export LD_CLIENT_KEY=${LD_CLIENT_KEY}" >> ~/.profile
-echo "export LD_CLIENT_KEY=${LD_CLIENT_KEY}" >> ~/.bashrc
-export LD_SDK_KEY=$(curl -s -X GET \
-  'https://app.launchdarkly.com/api/v2/projects/'${LD_PROJECT_KEY}'/environments/test' \
-  -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'' | jq -r .apiKey)
-echo "export LD_SDK_KEY=${LD_SDK_KEY}" >> ~/.profile
-echo "export LD_SDK_KEY=${LD_SDK_KEY}" >> ~/.bashrc
-
-# sed -i 's/^LD_SDK_KEY\=.*/LD_SDK_KEY\='\'${LD_SDK_KEY}\''/g' /opt/ld/talkin-ship-workshop-app/.env
-# sed -i 's/^NEXT_PUBLIC_LD_CLIENT_KEY\=.*/NEXT_PUBLIC_LD_CLIENT_KEY\='\'${LD_CLIENT_KEY}\''/g' /opt/ld/talkin-ship-workshop-app/.env
+cd /opt/ld/instruqt-release-solve/challenge-03
+echo "project_key = \"${LD_PROJECT_KEY}\"" >> terraform.tfvars
+terraform init
 
 exit 0

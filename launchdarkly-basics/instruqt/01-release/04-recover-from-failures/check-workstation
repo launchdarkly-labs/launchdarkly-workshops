@@ -9,13 +9,5 @@
 echo "This is the check script"
 
 
-# FLAG_NAME=$(curl -s -X GET \
-#   'https://app.launchdarkly.com/api/v2/flags/launch-darkly-basics/background-color' \
-#   -H 'Authorization: '${LD_API_KEY}'' | jq -r .name)
-
-# if [ -z "$FLAG_NAME" ]; then
-#     fail-message "Your flag was not created correctly."
-#     exit 1
-# fi
 
 exit 0

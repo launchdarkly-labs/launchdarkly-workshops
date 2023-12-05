@@ -6,11 +6,9 @@ title: Recovering From Release Failures
 teaser: Learn how to avoid rollbacks and data integrity issues
 notes:
 - type: text
-  contents: Version 1 of our new webstore is pretty basic. It offers users a "contact
-    us" form where they can inquire about specific toggles and get in touch with our
-    toggle specialists. To respond to the ever growing demand of custom toggles in
-    the market, we've decided to add a new feature to our webstore that will allow
-    customers to purchase toggles directly from our website.
+  contents: Our initial version of our website is pretty basic. It allows visitors to 
+    reach out to us to place an order, but customers now we want to enable customers to 
+    directly from our website without the need to talk to a representative.
 tabs:
 - title: LaunchDarkly
   type: browser
@@ -37,9 +35,9 @@ timelimit: 600
 Adding a Shopping Cart
 ===
 
-Rather than building a shopping cart on our own, we want to consume a cloud hosted payment service. Let's get started!
+Instead of building our own shopping cart, let's use an existing framework. This will make it very easy to implement and maintain.
 
-We'll create a new flag to handle our new billing user interface:
+Let's start by creating a new flag to handle our new billing user interface:
 
 1. From the left-hand navigation menu, click **Feature Flags**
 1. Click the **Create flag** button in the upper right-hand corner
@@ -67,14 +65,12 @@ The settings we've created for this flag will prevent our new feature from being
 1. Click **Review and save**, then **Save changes**
 
 
-Next: Add the Code
-===
+# Next: Add the Code
 
 Within our application, we need to implement the new feature that will be controlled via this **Updated Billing UI** feature flag.
 
-**Step 1:** Open the [Code Editor](#tab-2), and locate the `/src/components/inventory.tsx` file.
-
-**Step 2:** Scroll to close to the bottom of the file and locate the `\<ReserveButton /\>` object, around line 131. Replace the entire `\<ReserveButton /\>` code with the following:
+1. Open the [Code Editor](#tab-2), and locate the `/src/components/inventory.tsx` file.
+2. Scroll to close to the bottom of the file and locate the `\<ReserveButton /\>` object, around line 131. Replace the entire `\<ReserveButton /\>` code with the following:
 
 ```js
 {
@@ -102,20 +98,18 @@ Within our application, we need to implement the new feature that will be contro
 }
 ```
 
-After saving the file, we're ready to test this new feature!
+3. Save the file (^+S or ⌘+S, though it should autosave)
 
-**Step 3:** Switch over the the [Toggle Outfitters](#tab-1) tab. Login as **ron**, **leslie**, or **april**, you will see the **Reserve Yours** button has changed to **Add to cart**.
+Switch over the the [Toggle Outfitters](#tab-1) tab. Login as **ron**, **leslie**, **april**, or **andy**, and you will see the **Reserve Yours** button has changed to **Add to cart**.
 
-Verify only developers can see the new functionality by logging out. Then log back in as **ron**, **leslie**, or **april**.
 
-Finally: Run a Quick Test...
-===
+# Finally: Run a Quick Test
 
-Make sure you're logged in as **ron**, **leslie**, or **april**, then click the **Add to Cart** button on one of the items.
+Make sure you're logged in as **ron**, **leslie**, **april**, or **andy**, then click the **Add to Cart** button on one of the items.
 
-Whoops! It looks like there's an error in our system.
+Whoops! It looks like there's an error in our system!
 
-Unfortunately, buggy code sometimes makes it's way into production no matter how much you test. In traditional software delivery scenarios, if the bug is bad enough, this is a rollback or redeployment moment. Then it's sitting for a few hours hoping that rollback pipeline is successful. With LaunchDarkly, we can recover from this failure in seconds.
+No matter how much testing we do, sometime buggy code can make it into our production environment. Fortunately, LaunchDarkly allows you to recovery in just seconds!
 
 1. Go back to the [LaunchDarkly](#tab-0) tab.
 1. Toggle the On/Off flag to **Off** in the upper left
@@ -123,4 +117,4 @@ Unfortunately, buggy code sometimes makes it's way into production no matter how
 
 Review the [Toggle Outfitters](#tab-1) site once more, and even though you're logged in as a developer, we can no longer see the new **Add to Cart** function since the entire feature is now off.
 
-Great work!
+Great work! In the next challenge, we'll see how we can further automate recoveries and make migrations a cinch!

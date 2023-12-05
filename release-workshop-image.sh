@@ -4,29 +4,18 @@ export DEBIAN_FRONTEND=noninteractive
 apt-get -y update
 
 # Install tools
-apt-get -y install unzip
-wget https://releases.hashicorp.com/terraform/1.6.1/terraform_1.6.1_linux_amd64.zip
-unzip terraform_1.6.1_linux_amd64.zip
-mv terraform /usr/local/bin/
-rm terraform_1.6.1_linux_amd64.zip
-
-# Prep for installing NodeJS
-apt-get install -y ca-certificates curl gnupg
 mkdir -p /etc/apt/keyrings
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
 echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
-
-# Cleanup and install NodeJS
+wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /etc/apt/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 apt-get -y update
 apt-get -y autoremove
+apt-get -y install nuget unzip jq git curl gnupg ca-certificates terraform vim
+
+# Cleanup and install NodeJS
 apt-get install -y nodejs
 npm install -g npm@latest
-cd /root
-
-# Install Python
-apt-get -y install jq pip
-ln -s /usr/bin/python3 /usr/bin/python
-pip install launchdarkly-server-sdk flask flask_cors
 
 # clone the Terraform code to generate user
 mkdir -p /opt/ld
@@ -45,9 +34,9 @@ npm install
 cd /root
 
 # Create Code Server startup script
-cat <<-EOF > /etc/systemd/system/toggleout.service
+cat <<-EOF > /etc/systemd/system/toggleoutfitters.service
 [Unit]
-Description=Talkin' Ship App
+Description=Toggle Outfitters
 After=network.target
 StartLimitIntervalSec=0
 [Service]
@@ -62,9 +51,9 @@ ExecStart=npm run dev
 WantedBy=multi-user.target
 EOF
 
-# Start Code Server
-systemctl enable toggleout
-systemctl start toggleout
+# Start Toggle Outfitters app
+systemctl enable toggleoutfitters
+systemctl start toggleoutfitters
 
 # Install code editor
 mkdir -p /root/.local/share/code-server/User

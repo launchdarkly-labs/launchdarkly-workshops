@@ -7,7 +7,7 @@ teaser: Let's create new feature flag we can use to control the release of our n
   feature
 notes:
 - type: text
-  contents: Give us just a minute or two to setup your environment.
+  contents: Did you know that LaunchDarkly can reduce rollbacks from hours to seconds? There's no need to redeploy or deal with extended outages. Simply flip a switch to return to the last known good state!
 tabs:
 - title: LaunchDarkly
   type: browser
@@ -31,13 +31,15 @@ difficulty: basic
 timelimit: 600
 ---
 
-# Getting Started with Toggle Outfitters
+# Getting Started with the Toggle Outfitters App
 
-Toggle Outfitters is a retailer whose online presence is in need of an update. You've been brought on board to help modernize the Toggle Outfitters website.
+Toggle Outfitters is a retailer whose online presence is in need of an update. We're going to help modernize their website, and we're going to minimize downtime while we're at it.
+
+The first thing we want to do is release our minimally viable product. Currently, we have a "Coming Soon" page, but we want to at least list our products availability.
 
 # Create a Flag
 
-First, we need to create a feature flag. This flag won't do much right now, but over the few challenges, we'll incorporate this and other flags into an application and watch LaunchDarkly in action.
+Let's begin by creating a feature flag. This flag won't do much right now, but over the next few challenges, we'll incorporate this and other flags into an application and watch LaunchDarkly in action.
 
 1. From the left-hand navigation menu, click **Feature Flags**
 1. Click the **Create flag** button in the upper right-hand corner
