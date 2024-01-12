@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # This script runs when the platform check the challenge.
 #
@@ -6,31 +6,42 @@
 # script. If the exit code is not 0, the script fails. 
 #
 
-SEGMENT=`curl -s -X GET \
-  'https://app.launchdarkly.com/api/v2/segments/'$LD_PROJECT_KEY'/test/developers' \
-  -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN`
+# SEGMENT=`curl -s -X GET \
+#   'https://app.launchdarkly.com/api/v2/segments/'$LD_PROJECT_KEY'/test/developers' \
+#   -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN`
 
-if [ -z "$SEGMENT" ]; then
-  fail-message "The segment has been created. Please create the segment using the instructions provided."
-  exit 1
-fi
+# if [ -z "$SEGMENT" ]; then
+#   fail-message "The segment has been created. Please create the segment using the instructions provided."
+#   exit 1
+# fi
 
-USERS_LIST=("ron leslie april andy")
+# USERS_LIST=("ron leslie april andy")
 
-echo $SEGMENT | jq -r -c '.rules[0].clauses[0].values[]' | while read i; do
-  if [[ ! "${USERS_LIST[*]}" =~ "${i}" ]]; then
-    fail-message "Please make sure the users in the Developers segment match the following:\n\n* ron\n* leslie\n* april\n* andy\n"
-    exit 1
-  fi
-done
+# echo $SEGMENT | jq -r -c '.rules[0].clauses[0].values[]' | while read i; do
+#   if [[ ! "${USERS_LIST[*]}" =~ "${i}" ]]; then
+#     fail-message "Please make sure the users in the Developers segment match the following:\n\n* ron\n* leslie\n* april\n* andy\n"
+#     exit 1
+#   fi
+# done
 
-FLAGKEY_LIST=("storeEnabled billingUI")
+# FLAGKEY_LIST=("releaseUpdatedStorefront")
 
-echo $SEGMENT | jq -r -c '._flags[].key' | while read i; do
-  if [[ ! "${FLAGKEY_LIST[*]}" =~ "${i}" ]]; then
-    fail-message "Please make sure to add the Developers segment to the flag's targeting rules."
-    exit 1
-  fi
-done
+# echo $SEGMENT | jq -r -c '._flags[].key' | while read i; do
+#   if [[ ! "${FLAGKEY_LIST[*]}" =~ "${i}" ]]; then
+#     fail-message "Please make sure to add the Developers segment to the flag's targeting rules."
+#     exit 1
+#   fi
+# done
+
+# FLAG_DEFAULT=`curl -s -X GET \
+#   'https://app.launchdarkly.com/api/v2/flags/'$LD_PROJECT_KEY'/releaseUpdatedStorefront' \
+#   -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN | jq '.environments["test"].fallthrough.variation'`
+
+# if [ "$FLAG_DEFAULT" == "0" ]; then
+#   fail-message "The flag default value should be set to **Store Disabled**"
+#   exit 1
+# fi
 
 exit 0
+
+

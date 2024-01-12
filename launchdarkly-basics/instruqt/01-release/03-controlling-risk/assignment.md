@@ -6,10 +6,10 @@ title: Controlling Risk with Release Targeting
 teaser: Getting changes to users without action on their part.
 notes:
 - type: text
-  contents: You've seen how to quickly you can release new features, delivering them in
-    less than 200ms. But what happens if there's an issue with the code? We don't want all
-    of our users to see that. So let's provide a way to test in production before a full 
-    release.
+  contents: You've seen how to quickly you can release new features, delivering them
+    in less than 200ms. But what happens if there's an issue with the code? We don't
+    want all of our users to see that. So let's provide a way to test in production
+    before a full release.
 tabs:
 - title: LaunchDarkly
   type: browser
@@ -43,7 +43,7 @@ To get started, switch to the [LaunchDarkly tab](#tab-0), and do the following:
 1. Click **Segments** in the left navigation menu.
 1. Click the **Create segment** button in the upper, right-hand corner.
 1. Select **Build dynamic conditions and rules**
-1. Enter *Developers* in the **Name** field.
+1. Enter `Developers` in the **Name** field.
 1. Click **Save segment**.
 
 Now let's add a rule to make this segment meaningful.
@@ -57,7 +57,7 @@ Now let's add a rule to make this segment meaningful.
       1. ron *\<Enter\>*
       1. leslie *\<Enter\>*
       1. april *\<Enter\>*
-      1. andy *\<Enter/>*
+      1. andy *\<Enter\>*
 1. Click **Save changes**, then **Save changes** again.
 
 The list of **Values** is comprised of arbitrary usernames created for this exercise. In a real environment, you might use different attributes to identify groups of users in a more dynamic way. The usernames here are *case-sensitive*, so make sure you take that into consideration when you're creating targeting rules.
@@ -67,14 +67,14 @@ The list of **Values** is comprised of arbitrary usernames created for this exer
 Now let's update our feature flag from Challenge 1 to use our new segment.
 
 1. Click **Feature Flags** in the left navigation menu.
-1. Click **Release Toggle Outfitters Updated Storefront**.
+1. Click **Release Updated Storefront**.
 1. In the **Quick start** section, select *Target individuals*
 1. Scroll toward the bottom and click **+Add rule** and choose **Segment**
 1. Select the following values:
    1. **Operator**: is in
    1. **Segments**: Developers
    1. **Rollout**: Store Enabled
-1. In the **Default rule** section, click the pencil to the right side of the heading:
+1. In the **Default rule** section, click the **Edit** button to the right side of the heading:
    1. **Serve --> Variation**: Store Disabled
 1. Click the On/Off toggle at the top left to turn the flag **On**.
 1. Click **Review and save**, then **Save changes**.

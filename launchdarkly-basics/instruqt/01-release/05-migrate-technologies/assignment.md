@@ -40,18 +40,16 @@ In our previous challenge, we implemented a shopping cart for our frontend. Howe
 1. From the left-hand navigation menu, click **Feature Flags**
 1. Click the **Create flag** button in the upper right-hand corner
 1. Select **Release**, then click **Next**
-1. For **Name**, enter `Migrate to Stripe API`
-1. For **Key**:
-   1. Click the pencil
-   1. Enter `enableStripe`
-   1. Click the **blue** checkmark to the right
-   1. Click **Next**
+1. For **Name**, enter 
+```js
+Migrate to Stripe API
+```
+1. Click **Next**
 1. For **Flag variations**:
    1. Select **Boolean**
    1. First **Name**, enter `Stripe Checkout Enabled`
    1. Second **Name**, enter `Stripe Checkout Disabled`
 1. For **Default variations**, select *Stripe Checkout Disabled* for both **ON** and **OFF**
-1. Click **Advanced configuration**, and check the **SDKs using Client-side ID** box
 1. Click **Create flag**
 
 As we've seen in previous challenges, our new code will be disabled whether the flag is on or off. In order to allow our Developers to test the new feature, let's add targeting to our new flag.
@@ -99,10 +97,11 @@ To complete our migration and rollout our new API, we need to add the new functi
 
 We previously turned off our **Updated Billing UI** flag due to errors, but if we refactored our code properly, it should work now. Let's go ahead and turn that back on since we've added the API component.
 
+1. Switch back to the [LaunchDarkly](#tab-0) tab
 1. From the left-hand navigation menu, click **Feature Flags**
 1. To the right of the **Updated Billing UI**, toggle the On/Off switch to **On**
 1. Click **Save changes**
 
-Switch to the [Toggle Outfitters](#tab-1) tab, login as **ron**, **leslie**, **april**, or **andsy** and you will now be able to click *Add to Cart* successfully!
+Switch to the [Toggle Outfitters](#tab-1) tab, login as **ron**, **leslie**, **april**, or **andy** and you will now be able to click *Add to Cart* successfully!
 
 Nice work! It's great to be able to quickly turn off a flag to fix errors. But what if a developer isn't the first to catch it? In the next challenge, we'll take a look at automating risk mitigation.

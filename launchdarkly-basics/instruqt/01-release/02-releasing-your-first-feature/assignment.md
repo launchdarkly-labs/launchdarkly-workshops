@@ -47,20 +47,20 @@ The next step is to update our code to make use of our new flag.
 2. Replace line 12 with the following code. This allows the application to start receiving values for our feature flag.
 
 ```js
-const {storeEnabled} = useFlags();
+const {releaseUpdatedStorefront} = useFlags();
 ```
 
 3. Replace line 26 with the following code. This will allow us to control what code gets run based on the state of the flag.
 
 ```js
 {
-  storeEnabled ? <StoreLaunch /> : <StorePreview />
+  releaseUpdatedStorefront ? <StoreLaunch /> : <StorePreview />
 }
 ```
 
 4. Save the file (Cmd+S / Ctrl+S)
 
-Switch to the [Toggle Outfitters](#tab-1) tab, and you should see no change on our page.Since we haven't turned the flag on, our original preview page is being shown. However, our new code is in place and ready for action!
+Switch to the [Toggle Outfitters](#tab-1) tab, and you should see no change on our page. Since we haven't turned the flag on, our original preview page is being shown. However, our new code is in place and ready for action!
 
 # Flags in Action
 

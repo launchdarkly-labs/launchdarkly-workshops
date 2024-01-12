@@ -26,7 +26,7 @@ terraform init
 
 # clone our code repo
 cd /opt/ld
-git clone https://github.com/launchdarkly-labs/talkin-ship-workshop-app
+git clone https://github.com/kevincloud/talkin-ship-workshop-app
 cd /opt/ld/talkin-ship-workshop-app
 curl -o .env https://talkin-ship-workshop.s3.us-east-2.amazonaws.com/example.env
 # npm run build

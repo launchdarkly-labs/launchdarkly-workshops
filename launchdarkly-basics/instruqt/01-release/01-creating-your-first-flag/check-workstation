@@ -1,7 +1,7 @@
 #!/bin/sh
 
 FLAG_DATA=$(curl -s -X GET \
-  'https://app.launchdarkly.com/api/v2/flags/'${LD_PROJECT_KEY}'/storeEnabled' \
+  'https://app.launchdarkly.com/api/v2/flags/'${LD_PROJECT_KEY}'/releaseUpdatedStorefront' \
   -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'')
 
 FLAG_KEY=$(echo ${FLAG_DATA} | jq -r .code)
@@ -21,7 +21,7 @@ fi
 
 # ERRORS="false"
 
-# if [ "$FLAG_NAME" != "Release Toggle Outfitters Updated Storefront" ]; then 
+# if [ "$FLAG_NAME" != "Release Updated Storefront" ]; then 
 #     ERROR_1="* The name of the flag is incorrect\n"
 #     ERRORS="true"
 # fi

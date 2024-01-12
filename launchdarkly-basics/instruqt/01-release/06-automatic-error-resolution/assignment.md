@@ -110,7 +110,7 @@ export default useErrorHandling;
    1. **Trigger type**: Generic trigger
    1. **Trigger action**: Update flag targeting to *Off*
 1. Click **Save Trigger**
-1. Click the generated URL to copy it to the clipboard.
+1. Highlight the generated URL to copy it to the clipboard (NOTE: you must highlight and use ^+C or ⌘+C. The automatic copy does not work in all platforms).
 
 # Connect the Code to the Trigger
 

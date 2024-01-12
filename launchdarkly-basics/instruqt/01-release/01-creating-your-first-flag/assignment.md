@@ -7,7 +7,9 @@ teaser: Let's create new feature flag we can use to control the release of our n
   feature
 notes:
 - type: text
-  contents: Did you know that LaunchDarkly can reduce rollbacks from hours to seconds? There's no need to redeploy or deal with extended outages. Simply flip a switch to return to the last known good state!
+  contents: Did you know that LaunchDarkly can reduce rollbacks from hours to seconds?
+    There's no need to redeploy or deal with extended outages. Simply flip a switch
+    to return to the last known good state!
 tabs:
 - title: LaunchDarkly
   type: browser
@@ -44,12 +46,11 @@ Let's begin by creating a feature flag. This flag won't do much right now, but o
 1. From the left-hand navigation menu, click **Feature Flags**
 1. Click the **Create flag** button in the upper right-hand corner
 1. Select **Release**, then click **Next**
-1. For **Name**, enter `Release Toggle Outfitters Updated Storefront`
-1. For **Key**:
-   1. Click the pencil
-   1. Enter `storeEnabled`
-   1. Click the **blue** checkmark to the right
-   1. Click **Next**
+1. For **Name**, enter
+```js
+Release Updated Storefront
+```
+1. Click **Next**
 1. For **Flag variations**:
    1. Select **Boolean**
    1. First **Name**: `Store Enabled`
@@ -57,7 +58,6 @@ Let's begin by creating a feature flag. This flag won't do much right now, but o
 1. For **Default variations**:
    1. **Serve when targeting is ON**: *Store Enabled*
    1. **Serve when targeting is OFF**: *Store Disabled*
-1. Click **Advanced configuration**, and check the **SDKs using Client-side ID** box
 1. Click **Create flag**
 
 Congratulations! You've created your first flag and you're ready to proceed to the next challenge!

@@ -4,5 +4,19 @@ cd /opt/ld/instruqt-release-solve/challenge-03
 
 terraform apply -auto-approve
 
+curl -s -X PATCH \
+  'https://app.launchdarkly.com/api/v2/flags/'$LD_PROJECT_KEY'/releaseUpdatedStorefront' \
+  -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN'' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/environments/test/fallthrough/variation",
+        "value": 1
+      }
+    ]
+  }'
+
 exit 0
 

@@ -1,6 +1,6 @@
 slug: risk-free-releases
 id: apk1xxhtw40m
-title: Release!
+title: De-Risk Releases
 teaser: Release features and migrate with little to no risk
 description: |-
   Releases always carry some risk, but why does it need to
@@ -20,4 +20,6 @@ lab_config:
   overlay: false
   width: 25
   position: right
+  feedback_recap_enabled: true
   loadingMessages: true
+checksum: "10015762437873836019"
