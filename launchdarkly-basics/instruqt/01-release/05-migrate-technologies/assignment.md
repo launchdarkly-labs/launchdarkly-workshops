@@ -40,7 +40,7 @@ In our previous challenge, we implemented a shopping cart for our frontend. Howe
 1. From the left-hand navigation menu, click **Feature Flags**
 1. Click the **Create flag** button in the upper right-hand corner
 1. Select **Release**, then click **Next**
-1. For **Name**, enter 
+1. For **Name**, enter
 ```js
 Migrate to Stripe API
 ```
