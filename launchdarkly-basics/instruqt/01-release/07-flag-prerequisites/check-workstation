@@ -1,11 +1,11 @@
 #!/bin/sh
-#
-# This script runs when the platform check the challenge.
-#
-# The platform determines if the script was successful using the exit code of this
-# script. If the exit code is not 0, the script fails. 
-#
 
-echo "This is the check script"
+FLAG_PREREQ=`curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/flags/'$LD_PROJECT_KEY'/updated-billing-ui' \
+  -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN | jq -r '.environments.test.prerequisites[0].key'`
+
+if [ "$FLAG_PREREQ" != "migrate-to-stripe-api" ]; then
+    echo "The flag prerequisite was not set properly for the **Updated Billing UI** flag. Please review the instructions to set it up properly."
+fi
 
 exit 0

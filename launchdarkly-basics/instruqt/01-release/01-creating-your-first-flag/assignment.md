@@ -18,20 +18,18 @@ tabs:
   type: service
   hostname: workstation
   port: 3000
-- title: VS Code
+- title: Code Editor
   type: service
   hostname: workstation
   port: 8080
-- title: Code Editor
-  type: code
-  hostname: workstation
-  path: /opt/ld/talkin-ship-workshop-app
 - title: Shell
   type: terminal
   hostname: workstation
 difficulty: basic
 timelimit: 600
 ---
+
+# Lab 1
 
 # Getting Started with the Toggle Outfitters App
 
@@ -44,20 +42,28 @@ The first thing we want to do is release our minimally viable product. Currently
 Let's begin by creating a feature flag. This flag won't do much right now, but over the next few challenges, we'll incorporate this and other flags into an application and watch LaunchDarkly in action.
 
 1. From the left-hand navigation menu, click **Feature Flags**
-1. Click the **Create flag** button in the upper right-hand corner
-1. Select **Release**, then click **Next**
-1. For **Name**, enter
+2. Click the **Create flag** button in the upper right-hand corner
+3. Select **Release**, then click **Next**
+4. For **Name**, enter:
 ```js
 Release Updated Storefront
 ```
-1. Click **Next**
-1. For **Flag variations**:
+5. Click **Next**
+6. For **Flag variations**:
    1. Select **Boolean**
-   1. First **Name**: `Store Enabled`
-   1. Second **Name**: `Store Disabled`
-1. For **Default variations**:
+   1. First **Name**:
+```js
+Store Enabled
+```
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Second **Name**:
+```js
+Store Disabled
+```
+7. For **Default variations**:
    1. **Serve when targeting is ON**: *Store Enabled*
    1. **Serve when targeting is OFF**: *Store Disabled*
-1. Click **Create flag**
+8. Click **Advanced configuration** to show additional options
+9. Under **Client-side SDK availability**, check the box for **SDKs using Client-side ID**
+10. Click **Create flag**
 
 Congratulations! You've created your first flag and you're ready to proceed to the next challenge!

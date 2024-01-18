@@ -17,20 +17,18 @@ tabs:
   type: service
   hostname: workstation
   port: 3000
-- title: VS Code
+- title: Code Editor
   type: service
   hostname: workstation
   port: 8080
-- title: Code Editor
-  type: code
-  hostname: workstation
-  path: /opt/ld/talkin-ship-workshop-app
 - title: Shell
   type: terminal
   hostname: workstation
 difficulty: basic
 timelimit: 600
 ---
+
+# Lab 6
 
 # Instant Error Resolution
 
@@ -110,7 +108,7 @@ export default useErrorHandling;
    1. **Trigger type**: Generic trigger
    1. **Trigger action**: Update flag targeting to *Off*
 1. Click **Save Trigger**
-1. Highlight the generated URL to copy it to the clipboard (NOTE: you must highlight and use ^+C or ⌘+C. The automatic copy does not work in all platforms).
+1. Highlight the generated URL to copy it to the clipboard (NOTE: you must highlight and use ^+C or ⌘+C. The automatic copy does not work within the Instruqt platform).
 
 # Connect the Code to the Trigger
 

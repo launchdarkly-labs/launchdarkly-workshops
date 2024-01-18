@@ -18,14 +18,10 @@ tabs:
   type: service
   hostname: workstation
   port: 3000
-- title: VS Code
+- title: Code Editor
   type: service
   hostname: workstation
   port: 8080
-- title: Code Editor
-  type: code
-  hostname: workstation
-  path: /opt/ld/talkin-ship-workshop-app
 - title: Shell
   type: terminal
   hostname: workstation
@@ -33,23 +29,26 @@ difficulty: basic
 timelimit: 600
 ---
 
-Create a Segment
-===
+# Lab 3
+
+# Create a Segment
 
 A *segment* is a collection of users, devices, or any other group that share some sort of common attribute. By creating a segment, we can provide targeted access to specific features. In our previous challenge, we learned how to turn on and off features in a general way. Now let's reduce our target audience to just our developers.
 
 To get started, switch to the [LaunchDarkly tab](#tab-0), and do the following:
 
 1. Click **Segments** in the left navigation menu.
-1. Click the **Create segment** button in the upper, right-hand corner.
-1. Select **Build dynamic conditions and rules**
-1. Enter `Developers` in the **Name** field.
-1. Click **Save segment**.
+2. Click the **Create segment** button in the upper, right-hand corner.
+3. Select **Rule-based segments**
+4. In the **Name** field, enter:
+```js
+Developers
+```
+5. Click **Save segment**.
 
 Now let's add a rule to make this segment meaningful.
 
-1. In the **Include targets who match these rules** section at the bottom, click **+ Add rule**, then select **Custom**
-1. Select the following values:
+1. For **Rule 1**, select the following values:
    1. **Context kind**: user
    1. **Attribute**: name
    1. **Operator**: is one of
@@ -68,8 +67,7 @@ Now let's update our feature flag from Challenge 1 to use our new segment.
 
 1. Click **Feature Flags** in the left navigation menu.
 1. Click **Release Updated Storefront**.
-1. In the **Quick start** section, select *Target individuals*
-1. Scroll toward the bottom and click **+Add rule** and choose **Segment**
+1. Click **+ Add rules** and choose **Target segment**
 1. Select the following values:
    1. **Operator**: is in
    1. **Segments**: Developers

@@ -1,13 +1,28 @@
 #!/bin/sh
-#
-# This script runs when the platform check the challenge.
-#
-# The platform determines if the script was successful using the exit code of this
-# script. If the exit code is not 0, the script fails. 
-#
 
-echo "This is the check script"
+# 
+# Make sure the flag was created correctly
+# 
+FLAG_DATA=$(curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/flags/'${LD_PROJECT_KEY}'/updated-billing-ui' \
+  -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'')
 
+FLAG_SDK=$(echo ${FLAG_DATA} | jq -r .clientSideAvailability.usingEnvironmentId)
 
+if [ "$FLAG_SDK" != "true" ]; then 
+    fail-message "The **SDKs using Client-side ID** box was not selected.\n\nGo to the flag's **Settings** tab to enable it."
+    exit 1
+fi
+
+# 
+# Make sure the code was added properly
+# 
+cd /opt/ld/talkin-ship-workshop-app/src/components
+
+LINE1=`grep -n '^.\s*updatedBillingUi ?.*$' inventory.tsx | awk '{print $1;}' | cut -b -3`
+if [ "$LINE1" != "132" ]; then
+    fail-message "You must replace lines 131-138 in '/src/components/inventory.tsx' with the code supplied."
+    exit 1
+fi
 
 exit 0

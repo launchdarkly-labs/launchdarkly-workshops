@@ -1,11 +1,12 @@
 #!/bin/sh
-#
-# This script runs when the platform check the challenge.
-#
-# The platform determines if the script was successful using the exit code of this
-# script. If the exit code is not 0, the script fails. 
-#
 
-echo "This is the check script"
+FLAG_TRIGGER=`curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/flags/'$LD_PROJECT_KEY'/updated-billing-ui/triggers/test' \
+  -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN | jq -r '.items[0]._id'`
+
+if [ "$FLAG_TRIGGER" == "null" ]; then
+    fail-message "It looks like the trigger is missing. Please follow the instructions to create the flag trigger on the **Updated Billing UI** flag."
+    exit 1
+fi
 
 exit 0

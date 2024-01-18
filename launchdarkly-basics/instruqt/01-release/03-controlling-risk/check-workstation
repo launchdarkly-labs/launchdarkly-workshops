@@ -6,41 +6,52 @@
 # script. If the exit code is not 0, the script fails. 
 #
 
-# SEGMENT=`curl -s -X GET \
-#   'https://app.launchdarkly.com/api/v2/segments/'$LD_PROJECT_KEY'/test/developers' \
-#   -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN`
+# 
+# Make sure the segment was created 
+#
+SEGMENT=`curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/segments/'$LD_PROJECT_KEY'/test/developers' \
+  -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN`
 
-# if [ -z "$SEGMENT" ]; then
-#   fail-message "The segment has been created. Please create the segment using the instructions provided."
-#   exit 1
-# fi
+if [ -z "$SEGMENT" ]; then
+  fail-message "The segment has not been created. Please create the segment using the instructions provided."
+  exit 1
+fi
 
-# USERS_LIST=("ron leslie april andy")
+# 
+# Make sure the users were added to the segment correctly
+# 
+USERS_LIST=" ron leslie april andy "
+USER_PASS="true"
+while read i; do
+    if [[ "$USERS_LIST" != *" $i "* ]]; then
+        echo $i
+        USER_PASS="false"
+    fi
+done < <(echo $SEGMENT | jq -r -c '.rules[0].clauses[0].values[]')
 
-# echo $SEGMENT | jq -r -c '.rules[0].clauses[0].values[]' | while read i; do
-#   if [[ ! "${USERS_LIST[*]}" =~ "${i}" ]]; then
-#     fail-message "Please make sure the users in the Developers segment match the following:\n\n* ron\n* leslie\n* april\n* andy\n"
-#     exit 1
-#   fi
-# done
+if [ "$USER_PASS" == "false" ]; then
+    fail-message "Please make sure the users in the Developers segment match the following:\n\n* ron\n* leslie\n* april\n* andy\n"
+    exit 1
+fi
 
-# FLAGKEY_LIST=("releaseUpdatedStorefront")
+FLAGKEY_LIST=" release-updated-storefront "
 
-# echo $SEGMENT | jq -r -c '._flags[].key' | while read i; do
-#   if [[ ! "${FLAGKEY_LIST[*]}" =~ "${i}" ]]; then
-#     fail-message "Please make sure to add the Developers segment to the flag's targeting rules."
-#     exit 1
-#   fi
-# done
+while read i; do
+  if [[ "$FLAGKEY_LIST" != *" $i "* ]]; then
+    echo "Please make sure to add the Developers segment to the flag's targeting rules."
+    exit 1
+  fi
+done < <(echo $SEGMENT | jq -r -c '._flags[].key')
 
-# FLAG_DEFAULT=`curl -s -X GET \
-#   'https://app.launchdarkly.com/api/v2/flags/'$LD_PROJECT_KEY'/releaseUpdatedStorefront' \
-#   -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN | jq '.environments["test"].fallthrough.variation'`
+FLAG_DEFAULT=`curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/flags/'$LD_PROJECT_KEY'/release-updated-storefront' \
+  -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN | jq '.environments["test"].fallthrough.variation'`
 
-# if [ "$FLAG_DEFAULT" == "0" ]; then
-#   fail-message "The flag default value should be set to **Store Disabled**"
-#   exit 1
-# fi
+if [ "$FLAG_DEFAULT" == "0" ]; then
+  fail-message "The flag default value needs to be set to **Store Disabled**"
+  exit 1
+fi
 
 exit 0
 

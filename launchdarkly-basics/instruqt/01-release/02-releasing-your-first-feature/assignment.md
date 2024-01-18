@@ -17,20 +17,18 @@ tabs:
   type: service
   hostname: workstation
   port: 3000
-- title: VS Code
+- title: Code Editor
   type: service
   hostname: workstation
   port: 8080
-- title: Code Editor
-  type: code
-  hostname: workstation
-  path: /opt/ld/talkin-ship-workshop-app
 - title: Shell
   type: terminal
   hostname: workstation
 difficulty: basic
 timelimit: 1200
 ---
+
+# Lab 2
 
 # Dark-Launching our Feature
 

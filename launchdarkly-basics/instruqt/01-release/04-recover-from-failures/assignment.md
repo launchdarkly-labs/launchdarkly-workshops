@@ -17,14 +17,10 @@ tabs:
   type: service
   hostname: workstation
   port: 3000
-- title: VS Code
+- title: Code Editor
   type: service
   hostname: workstation
   port: 8080
-- title: Code Editor
-  type: code
-  hostname: workstation
-  path: /opt/ld/talkin-ship-workshop-app
 - title: Shell
   type: terminal
   hostname: workstation
@@ -32,31 +28,40 @@ difficulty: basic
 timelimit: 600
 ---
 
-Adding a Shopping Cart
-===
+# Lab 4
+
+# Adding a Shopping Cart
 
 Instead of building our own shopping cart, let's use an existing framework. This will make it very easy to implement and maintain.
 
 Let's start by creating a new flag to handle our new billing user interface:
 
 1. From the left-hand navigation menu, click **Feature Flags**
-1. Click the **Create flag** button in the upper right-hand corner
-1. Select **Release**, then click **Next**
-1. For **Name**, enter
+2. Click the **Create flag** button in the upper right-hand corner
+3. Select **Release**, then click **Next**
+4. For **Name**, enter
 ```js
 Updated Billing UI
 ```
-1. Click **Next**
-1. For **Flag variations**:
+5. Click **Next**
+6. For **Flag variations**:
    1. Select **Boolean**
-   1. First **Name**: `Enable Stripe`
-   1. Second **Name**: `Self-hosted Form`
-1. For **Default variations**, select *Self-hosted Form* for both **ON** and **OFF**
-1. Click **Create flag**
+   1. First **Name**:
+```js
+Enable Stripe
+```
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Second **Name**:
+```js
+Self-hosted Form
+```
+7. For **Default variations**, select *Self-hosted Form* for both **ON** and **OFF**
+8. Click **Advanced configuration** to show additional options
+9. Under **Client-side SDK availability**, check the box for **SDKs using Client-side ID**
+10. Click **Create flag**
 
 The settings we've created for this flag will prevent our new feature from being seen by everyone--whether the flag is on or off. But we do want our developers to begin testing the new feature, so let's add a targeting rule which just allows those in the Developers segment to use the new feature.
 
-1. In the **Quick start** section, select *Target segments*
+1. Click **+ Add rules** and choose **Target segments**
 1. From the **Segments** dropdown, select *Developers*
 1. From the **Rollout** dropdown, select *Enable Stripe*
 1. Toggle the On/Off flag to **On** in the upper left
@@ -72,7 +77,7 @@ Within our application, we need to implement the new feature that will be contro
 
 ```js
 {
-  billing ? (
+  updatedBillingUi ? (
     <AddToCartButton
       product={product}
       errorTesting={errorTesting}
@@ -90,7 +95,7 @@ Within our application, we need to implement the new feature that will be contro
   )
 }
 {
-  billing && (
+  updatedBillingUi && (
     <ErrorDialog errorState={errorState} setErrorState={setErrorState} />
   )
 }
@@ -102,7 +107,7 @@ Switch over the the [Toggle Outfitters](#tab-1) tab. Login as **ron**, **leslie*
 
 # Finally: Run a Quick Test
 
-Make sure you're logged in as **ron**, **leslie**, **april**, or **andy**, then click the **Add to Cart** button on one of the items.
+Make sure you're still logged in as **ron**, **leslie**, **april**, or **andy**, then click the **Add to Cart** button on one of the items.
 
 Whoops! It looks like there's an error in our system!
 

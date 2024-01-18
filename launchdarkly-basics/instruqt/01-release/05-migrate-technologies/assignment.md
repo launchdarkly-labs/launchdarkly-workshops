@@ -16,20 +16,18 @@ tabs:
   type: service
   hostname: workstation
   port: 3000
-- title: VS Code
+- title: Code Editor
   type: service
   hostname: workstation
   port: 8080
-- title: Code Editor
-  type: code
-  hostname: workstation
-  path: /opt/ld/talkin-ship-workshop-app
 - title: Shell
   type: terminal
   hostname: workstation
 difficulty: basic
 timelimit: 600
 ---
+
+# Lab 5
 
 # API Migration
 
@@ -38,23 +36,31 @@ In our previous challenge, we implemented a shopping cart for our frontend. Howe
 # Create the API Flag
 
 1. From the left-hand navigation menu, click **Feature Flags**
-1. Click the **Create flag** button in the upper right-hand corner
-1. Select **Release**, then click **Next**
-1. For **Name**, enter
+2. Click the **Create flag** button in the upper right-hand corner
+3. Select **Release**, then click **Next**
+4. For **Name**, enter
 ```js
 Migrate to Stripe API
 ```
-1. Click **Next**
-1. For **Flag variations**:
+5. Click **Next**
+6. For **Flag variations**:
    1. Select **Boolean**
-   1. First **Name**, enter `Stripe Checkout Enabled`
-   1. Second **Name**, enter `Stripe Checkout Disabled`
-1. For **Default variations**, select *Stripe Checkout Disabled* for both **ON** and **OFF**
-1. Click **Create flag**
+   1. First **Name**, enter:
+```js
+Stripe Checkout Enabled
+```
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Second **Name**, enter:
+```js
+Stripe Checkout Disabled
+```
+7. For **Default variations**, select *Stripe Checkout Disabled* for both **ON** and **OFF**
+8. Click **Advanced configuration** to show additional options
+9. Under **Client-side SDK availability**, check the box for **SDKs using Client-side ID**
+10. Click **Create flag**
 
 As we've seen in previous challenges, our new code will be disabled whether the flag is on or off. In order to allow our Developers to test the new feature, let's add targeting to our new flag.
 
-1. In the **Quick start** section, select *Target segments*
+1. Click **+ Add rules** and choose **Target segments**
 1. From the **Segments** dropdown, select *Developers*
 1. From the **Rollout** dropdown, select *Stripe Checkout Enabled*
 1. Toggle the flag to **On** in the upper left
@@ -72,15 +78,15 @@ To complete our migration and rollout our new API, we need to add the new functi
 //If you want to see how that works, take a look at the `/src/utils/checkout-helpers.ts` file.
 
   if (req.method === 'POST') {
-  const enableStripe = await ldClient.variation("enableStripe", jsonObject, false);
+  const migrateToStripeApi = await ldClient.variation("migrate-to-stripe-api", jsonObject, false);
 
-    if (enableStripe) {
+    if (migrateToStripeApi) {
       createCheckoutForStripe(req, res)
     }
   } if (req.method === 'GET') {
-    const enableStripe = await ldClient.variation("enableStripe", jsonObject, false);
+    const migrateToStripeApi = await ldClient.variation("migrate-to-stripe-api", jsonObject, false);
 
-    if (enableStripe) {
+    if (migrateToStripeApi) {
       try {
         res.send("You are good to go!");
       } catch (error: any) {

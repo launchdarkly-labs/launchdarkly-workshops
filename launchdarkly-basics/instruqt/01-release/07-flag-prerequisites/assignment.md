@@ -17,20 +17,18 @@ tabs:
   type: service
   hostname: workstation
   port: 3000
-- title: VS Code
+- title: Code Editor
   type: service
   hostname: workstation
   port: 8080
-- title: Code Editor
-  type: code
-  hostname: workstation
-  path: /opt/ld/talkin-ship-workshop-app
 - title: Shell
   type: terminal
   hostname: workstation
 difficulty: basic
 timelimit: 600
 ---
+
+# Lab 7
 
 Let's begin by taking a look at our failed migration from earlier. We have these two components:
 
@@ -43,8 +41,7 @@ The frontend changes (made available by the **Updated Billing IU** flag) don't w
 
 1. Switch to the [LaunchDarkly](#tab-0) tab.
 1. From the left-hand navigation menu, click **Feature Flags**
-1. Click on **Updated Billing UI**.
-1. In the **Prerequisites** section, click **+ Add prerequisites**
+1. Click **+ Add rules** and choose **Set prerequisites**
 1. From the **Flag** dropdown, select *Migrate to Stripe API*
 1. Make sure **Variation** is set to *Stripe Checkout Enabled*
 1. Click **Review and save**, then **Save changes**
