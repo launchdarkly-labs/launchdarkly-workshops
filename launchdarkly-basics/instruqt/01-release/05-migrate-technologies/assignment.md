@@ -37,26 +37,22 @@ In our previous challenge, we implemented a shopping cart for our frontend. Howe
 
 1. From the left-hand navigation menu, click **Feature Flags**
 2. Click the **Create flag** button in the upper right-hand corner
-3. Select **Release**, then click **Next**
-4. For **Name**, enter
+3. For **Name**, enter:
 ```js
 Migrate to Stripe API
 ```
-5. Click **Next**
-6. For **Flag variations**:
-   1. Select **Boolean**
-   1. First **Name**, enter:
+4. Under **Configuration**, select **Release**
+5. Under **Variations**:
+   1. First **Name**:
 ```js
 Stripe Checkout Enabled
 ```
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Second **Name**, enter:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Second **Name**, enter:
 ```js
 Stripe Checkout Disabled
 ```
-7. For **Default variations**, select *Stripe Checkout Disabled* for both **ON** and **OFF**
-8. Click **Advanced configuration** to show additional options
-9. Under **Client-side SDK availability**, check the box for **SDKs using Client-side ID**
-10. Click **Create flag**
+6. In the **Additional configuration** section, under **Client-side SDK availability**, check the box for **SDKs using Client-side ID**
+7. Click **Create flag** in the lower right-hand side of the screen.
 
 As we've seen in previous challenges, our new code will be disabled whether the flag is on or off. In order to allow our Developers to test the new feature, let's add targeting to our new flag.
 

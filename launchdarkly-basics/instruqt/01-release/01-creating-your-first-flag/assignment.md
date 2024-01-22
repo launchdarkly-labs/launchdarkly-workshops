@@ -43,27 +43,20 @@ Let's begin by creating a feature flag. This flag won't do much right now, but o
 
 1. From the left-hand navigation menu, click **Feature Flags**
 2. Click the **Create flag** button in the upper right-hand corner
-3. Select **Release**, then click **Next**
-4. For **Name**, enter:
+3. For **Name**, enter:
 ```js
 Release Updated Storefront
 ```
-5. Click **Next**
-6. For **Flag variations**:
-   1. Select **Boolean**
+4. Under **Variations**:
    1. First **Name**:
 ```js
 Store Enabled
 ```
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Second **Name**:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Second **Name**:
 ```js
 Store Disabled
 ```
-7. For **Default variations**:
-   1. **Serve when targeting is ON**: *Store Enabled*
-   1. **Serve when targeting is OFF**: *Store Disabled*
-8. Click **Advanced configuration** to show additional options
-9. Under **Client-side SDK availability**, check the box for **SDKs using Client-side ID**
-10. Click **Create flag**
+5. In the **Additional configuration** section, under **Client-side SDK availability**, check the box for **SDKs using Client-side ID**
+6. Click **Create flag** in the lower right-hand side of the screen.
 
 Congratulations! You've created your first flag and you're ready to proceed to the next challenge!

@@ -67,7 +67,7 @@ Now let's update our feature flag from Challenge 1 to use our new segment.
 
 1. Click **Feature Flags** in the left navigation menu.
 1. Click **Release Updated Storefront**.
-1. Click **+ Add rules** and choose **Target segment**
+1. Click **+ Add rules** and choose **Target segments**
 1. Select the following values:
    1. **Operator**: is in
    1. **Segments**: Developers

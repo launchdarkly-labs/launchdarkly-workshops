@@ -113,6 +113,7 @@ export default useErrorHandling;
 # Connect the Code to the Trigger
 
 1. Switch back over to the [Code Editor](#tab-2) tab.
+1. Make sure `/src/hooks/useErrorHandling.ts` is still open.
 1. On line 6, replace `PASTE_URL_TRIGGER_HERE` with the copied URL
 1. Save the file (^+S or ⌘+S)
 

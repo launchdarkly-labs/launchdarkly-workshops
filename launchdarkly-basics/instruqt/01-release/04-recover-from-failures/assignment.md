@@ -38,26 +38,22 @@ Let's start by creating a new flag to handle our new billing user interface:
 
 1. From the left-hand navigation menu, click **Feature Flags**
 2. Click the **Create flag** button in the upper right-hand corner
-3. Select **Release**, then click **Next**
-4. For **Name**, enter
+3. For **Name**, enter:
 ```js
 Updated Billing UI
 ```
-5. Click **Next**
-6. For **Flag variations**:
-   1. Select **Boolean**
+4. Under **Configuration**, select **Release**
+5. Under **Variations**:
    1. First **Name**:
 ```js
 Enable Stripe
 ```
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c. Second **Name**:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Second **Name**:
 ```js
 Self-hosted Form
 ```
-7. For **Default variations**, select *Self-hosted Form* for both **ON** and **OFF**
-8. Click **Advanced configuration** to show additional options
-9. Under **Client-side SDK availability**, check the box for **SDKs using Client-side ID**
-10. Click **Create flag**
+6. In the **Additional configuration** section, under **Client-side SDK availability**, check the box for **SDKs using Client-side ID**
+7. Click **Create flag** in the lower right-hand side of the screen.
 
 The settings we've created for this flag will prevent our new feature from being seen by everyone--whether the flag is on or off. But we do want our developers to begin testing the new feature, so let's add a targeting rule which just allows those in the Developers segment to use the new feature.
 
