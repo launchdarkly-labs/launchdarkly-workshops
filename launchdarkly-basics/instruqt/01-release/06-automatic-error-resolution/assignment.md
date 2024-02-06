@@ -21,9 +21,6 @@ tabs:
   type: service
   hostname: workstation
   port: 8080
-- title: Shell
-  type: terminal
-  hostname: workstation
 difficulty: basic
 timelimit: 600
 ---
