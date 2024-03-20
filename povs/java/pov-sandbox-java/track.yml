@@ -1,15 +1,15 @@
-slug: pov-sandbox-net
-id: prgwl3orhwbr
-title: PoV Sandbox - .NET
-teaser: PoV Sandbox for .NET environments
+slug: pov-sandbox-java
+id: ocqmaa6mabbl
+title: PoV Sandbox - Java
+teaser: PoV Sandbox for Java environments
 description: |-
   Quickly learn how to use LaunchDarkly in a
-  .NET environment. Use the example code or
+  Java environment. Use the example code or
   create or bring your own code.
 icon: https://launchdarkly.com/favicon-dark-mode.png
 tags:
+- java
 - pov
-- dotnet
 owner: launchdarkly
 developers:
 - kcochran@launchdarkly.com
@@ -23,4 +23,4 @@ lab_config:
   extend_ttl: 3600
   feedback_recap_enabled: true
   loadingMessages: true
-checksum: "12392179147049655522"
+checksum: "13671400413144118376"
