@@ -1,0 +1,37 @@
+#!/bin/bash
+
+set -euo pipefail
+
+until [ -f /opt/instruqt/bootstrap/host-bootstrap-completed ]; do
+    echo "Waiting for instruqt bootstrap to complete"
+    sleep 1
+done
+
+cd /opt/ld/terraform-ld-student
+echo "sandbox_id = \"${_SANDBOX_ID}\"" > terraform.tfvars
+terraform apply -auto-approve
+export LD_PROJECT_KEY="$(terraform output -json | jq -r '.students.value[0].project_key')"
+echo "" >> ~/.profile
+echo "export LD_PROJECT_KEY=\"$LD_PROJECT_KEY\"" >> ~/.profile
+echo "" >> ~/.bashrc
+echo "export LD_PROJECT_KEY=\"$LD_PROJECT_KEY\"" >> ~/.bashrc
+
+export LD_CLIENT_KEY=$(curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/projects/'${LD_PROJECT_KEY}'/environments/test' \
+  -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'' | jq -r ._id)
+echo "export LD_CLIENT_KEY=${LD_CLIENT_KEY}" >> ~/.profile
+echo "export LD_CLIENT_KEY=${LD_CLIENT_KEY}" >> ~/.bashrc
+export LD_SDK_KEY=$(curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/projects/'${LD_PROJECT_KEY}'/environments/test' \
+  -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'' | jq -r .apiKey)
+echo "export LD_SDK_KEY=${LD_SDK_KEY}" >> ~/.profile
+echo "export LD_SDK_KEY=${LD_SDK_KEY}" >> ~/.bashrc
+
+cd /opt/ld/flag
+echo "project_key = \"${LD_PROJECT_KEY}\"" > terraform.tfvars
+terraform apply -auto-approve
+
+cat <<-EOF > /opt/react/ld-sample-app-react/.env
+REACT_APP_LD_SDK_KEY='${LD_SDK_KEY}'
+REACT_APP_LD_CLIENT_KEY='${LD_CLIENT_KEY}'
+EOF
