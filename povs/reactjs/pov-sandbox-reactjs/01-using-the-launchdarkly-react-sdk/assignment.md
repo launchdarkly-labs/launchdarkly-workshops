@@ -4,11 +4,11 @@ id: qxswb8dosmpe
 type: challenge
 title: Using the LaunchDarkly React SDK
 teaser: Getting started with the LaunchDarkly SDK is easy. This track provides you
-  with a Java environment which is ready to go!
+  with a React environment which is ready to go!
 notes:
 - type: text
   contents: Are you ready to being your PoV? This environment provides you with everything
-    you need to see exactly how the LaunchDarkly Java SDK can work for you.
+    you need to see exactly how the LaunchDarkly React SDK can work for you.
 tabs:
 - title: Code Editor
   type: service
