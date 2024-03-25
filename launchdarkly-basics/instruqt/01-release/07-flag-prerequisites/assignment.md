@@ -39,7 +39,7 @@ The frontend changes (made available by the **Updated Billing IU** flag) don't w
 1. Switch to the [LaunchDarkly](#tab-0) tab.
 1. From the left-hand navigation menu, click **Feature Flags**
 1. Click **Updated Billing UI**
-1. Click **+ Add rule** and choose **Set prerequisites**
+1. Click **+ Add rules** and choose **Set prerequisites**
 1. From the **Flag** dropdown, select *Migrate to Stripe API*
 1. Make sure **Variation** is set to *Stripe Checkout Enabled*
 1. Click **Review and save**, then **Save changes**

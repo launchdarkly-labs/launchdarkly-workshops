@@ -53,7 +53,7 @@ Stripe Checkout Disabled
 
 As we've seen in previous challenges, our new code will be disabled whether the flag is on or off. In order to allow our Developers to test the new feature, let's add targeting to our new flag.
 
-1. Click **+ Add rule** and choose **Target segments**
+1. Click **+ Add rules** and choose **Target segments**
 1. From the **Segments** dropdown, select *Developers*
 1. From the **Rollout** dropdown, select *Stripe Checkout Enabled*
 1. Toggle the flag to **On** in the upper left

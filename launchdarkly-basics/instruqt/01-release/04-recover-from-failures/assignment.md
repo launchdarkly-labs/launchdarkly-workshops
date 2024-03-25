@@ -54,7 +54,7 @@ Self-hosted Form
 
 The settings we've created for this flag will prevent our new feature from being seen by everyone--whether the flag is on or off. But we do want our developers to begin testing the new feature, so let's add a targeting rule which just allows those in the Developers segment to use the new feature.
 
-1. Click **+ Add rule** and choose **Target segments**
+1. Click **+ Add rules** and choose **Target segments**
 1. From the **Segments** dropdown, select *Developers*
 1. From the **Rollout** dropdown, select *Enable Stripe*
 1. Toggle the On/Off flag to **On** in the upper left
