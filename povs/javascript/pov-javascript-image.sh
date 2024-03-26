@@ -152,15 +152,23 @@ resource "launchdarkly_feature_flag" "test_bgcolor_flag" {
   key         = "background-color"
   name        = "Change Background Color"
 
-  variation_type = "boolean"
+  variation_type = "string"
 
   variations {
-    value = "true"
-    name  = "True"
+    value = "#FFC0CB"
+    name  = "Valentine's Day"
   }
   variations {
-    value = "false"
-    name  = "False"
+    value = "#90EE90"
+    name  = "St. Patrick's Day"
+  }
+  variations {
+    value = "#FFCBA4"
+    name  = "Easter Day"
+  }
+  variations {
+    value = "#000000"
+    name  = "No Holiday"
   }
 
   client_side_availability {
@@ -170,7 +178,7 @@ resource "launchdarkly_feature_flag" "test_bgcolor_flag" {
 
   defaults {
     on_variation  = 0
-    off_variation = 1
+    off_variation = 3
   }
 
   tags = [
