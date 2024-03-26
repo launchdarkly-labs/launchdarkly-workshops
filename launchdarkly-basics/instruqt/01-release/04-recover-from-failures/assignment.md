@@ -7,8 +7,8 @@ teaser: Learn how to avoid rollbacks and data integrity issues
 notes:
 - type: text
   contents: Our initial version of our website is pretty basic. It allows visitors
-    to reach out to us to place an order, but now we want to enable customers
-    to order directly from our website without the need to talk to a representative.
+    to reach out to us to place an order, but now we want to enable customers to order
+    directly from our website without the need to talk to a representative.
 tabs:
 - title: LaunchDarkly
   type: browser
