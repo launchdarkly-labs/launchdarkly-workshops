@@ -1,5 +1,6 @@
 ---
 slug: using-the-launchdarkly-javascript-sdk
+id: our9gvqcge5v
 type: challenge
 title: Using the LaunchDarkly JavaScript SDK
 teaser: Getting started with the LaunchDarkly SDK is easy. This track provides you
@@ -19,7 +20,7 @@ tabs:
 - title: JavaScript App
   type: service
   hostname: workstation
-  port: 8080
+  port: 3000
 - title: Shell
   type: terminal
   hostname: workstation
