@@ -1,4 +1,5 @@
 slug: pov-sandbox-python
+id: 6kyxkeu1u7ye
 title: PoV Sandbox - Python
 teaser: PoV Sandbox for Python environments
 description: |-
@@ -22,3 +23,4 @@ lab_config:
   extend_ttl: 3600
   feedback_recap_enabled: true
   loadingMessages: true
+checksum: "913051134500557104"
