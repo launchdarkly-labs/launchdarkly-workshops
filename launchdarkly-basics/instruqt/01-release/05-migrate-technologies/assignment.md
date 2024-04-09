@@ -48,8 +48,7 @@ Stripe Checkout Enabled
 ```js
 Stripe Checkout Disabled
 ```
-6. In the **Additional configuration** section, under **Client-side SDK availability**, check the box for **SDKs using Client-side ID**
-7. Click **Create flag** in the lower right-hand side of the screen.
+6. Click **Create flag** in the lower right-hand side of the screen.
 
 As we've seen in previous challenges, our new code will be disabled whether the flag is on or off. In order to allow our Developers to test the new feature, let's add targeting to our new flag.
 

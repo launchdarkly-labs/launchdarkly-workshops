@@ -7,13 +7,6 @@ FLAG_DATA=$(curl -s -X GET \
   'https://app.launchdarkly.com/api/v2/flags/'${LD_PROJECT_KEY}'/migrate-to-stripe-api' \
   -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'')
 
-FLAG_SDK=$(echo ${FLAG_DATA} | jq -r .clientSideAvailability.usingEnvironmentId)
-
-if [ "$FLAG_SDK" != "true" ]; then 
-    fail-message "The **SDKs using Client-side ID** box was not selected.\n\nGo to the flag's **Settings** tab to enable it."
-    exit 1
-fi
-
 # 
 # Make sure the code was added properly
 # 

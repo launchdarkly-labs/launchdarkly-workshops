@@ -49,8 +49,7 @@ Enable Stripe
 ```js
 Self-hosted Form
 ```
-6. In the **Additional configuration** section, under **Client-side SDK availability**, check the box for **SDKs using Client-side ID**
-7. Click **Create flag** in the lower right-hand side of the screen.
+6. Click **Create flag** in the lower right-hand side of the screen.
 
 The settings we've created for this flag will prevent our new feature from being seen by everyone--whether the flag is on or off. But we do want our developers to begin testing the new feature, so let's add a targeting rule which just allows those in the Developers segment to use the new feature.
 

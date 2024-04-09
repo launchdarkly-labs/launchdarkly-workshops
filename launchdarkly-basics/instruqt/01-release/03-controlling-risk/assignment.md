@@ -45,6 +45,8 @@ Developers
 
 Now let's add a rule to make this segment meaningful.
 
+![Example Segment Rule](../assets/rule-1.png)
+
 1. For **Rule 1**, select the following values:
    1. **Context kind**: user
    1. **Attribute**: name

@@ -53,7 +53,6 @@ Store Enabled
 ```js
 Store Disabled
 ```
-5. In the **Additional configuration** section, under **Client-side SDK availability**, check the box for **SDKs using Client-side ID**
-6. Click **Create flag** in the lower right-hand side of the screen.
+5. Click **Create flag** in the lower right-hand side of the screen.
 
 Congratulations! You've created your first flag and you're ready to proceed to the next challenge!
