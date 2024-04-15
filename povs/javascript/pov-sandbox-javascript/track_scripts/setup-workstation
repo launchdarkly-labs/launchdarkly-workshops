@@ -32,3 +32,9 @@ echo "project_key = \"${LD_PROJECT_KEY}\"" > terraform.tfvars
 terraform apply -auto-approve
 
 echo "var clientKey = \"${LD_CLIENT_KEY}\";" > /opt/javascript/ld-sample-app-javascript/static/keys.js
+
+###################
+# Get repo updates
+###################
+cd /opt/javascript/ld-sample-app-javascript
+git pull

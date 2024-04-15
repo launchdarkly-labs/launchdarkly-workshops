@@ -33,3 +33,9 @@ terraform apply -auto-approve
 
 echo "export PATH=\$PATH:/usr/local/go/bin" >> ~/.profile
 echo "export PATH=\$PATH:/usr/local/go/bin" >> ~/.bashrc
+
+###################
+# Get repo updates
+###################
+cd /opt/golang/ld-sample-app-go
+git pull

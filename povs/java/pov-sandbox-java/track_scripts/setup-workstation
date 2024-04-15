@@ -30,3 +30,9 @@ echo "export LD_SDK_KEY=${LD_SDK_KEY}" >> ~/.bashrc
 cd /opt/ld/flag
 echo "project_key = \"${LD_PROJECT_KEY}\"" > terraform.tfvars
 terraform apply -auto-approve
+
+###################
+# Get repo updates
+###################
+cd /opt/java/ld-sample-app-java
+git pull

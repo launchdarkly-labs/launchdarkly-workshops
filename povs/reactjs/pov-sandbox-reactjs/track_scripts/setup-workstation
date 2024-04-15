@@ -35,3 +35,9 @@ cat <<-EOF > /opt/react/ld-sample-app-react/.env
 REACT_APP_LD_SDK_KEY='${LD_SDK_KEY}'
 REACT_APP_LD_CLIENT_KEY='${LD_CLIENT_KEY}'
 EOF
+
+###################
+# Get repo updates
+###################
+cd /opt/react/ld-sample-app-react
+git pull
