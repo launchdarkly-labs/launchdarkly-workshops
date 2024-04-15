@@ -1,15 +1,15 @@
-slug: pov-sandbox-nodejs
-id: 8jlykdhepkpk
-title: PoV Sandbox - NodeJS
-teaser: PoV Sandbox for NodeJS environments
+slug: pov-sandbox-go
+title: PoV Sandbox - Go
+teaser: PoV Sandbox for Go environments
 description: |-
   Quickly learn how to use LaunchDarkly in a
-  Node environment. Use the example code or
+  Go environment. Use the example code or
   create or bring your own code.
 icon: https://launchdarkly.com/favicon-dark-mode.png
 tags:
+- golang
+- go
 - pov
-- nodejs
 owner: launchdarkly
 developers:
 - kcochran@launchdarkly.com
@@ -23,4 +23,3 @@ lab_config:
   extend_ttl: 3600
   feedback_recap_enabled: true
   loadingMessages: true
-checksum: "6627399810097769443"

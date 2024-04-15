@@ -1,0 +1,13 @@
+version: "3"
+virtualbrowsers:
+- name: launchdarkly
+  url: https://i3vcudz5ncoet6xkoaqxnos7mu0sdcpz.lambda-url.us-east-2.on.aws/?sandboxId=${_SANDBOX_ID}
+virtualmachines:
+- name: workstation
+  image: instruqt-launchdarkly/pov-image-golang
+  shell: /bin/bash
+  machine_type: n1-standard-1
+secrets:
+- name: AWS_SECRET_ACCESS_KEY
+- name: AWS_ACCESS_KEY_ID
+- name: LAUNCHDARKLY_ACCESS_TOKEN
