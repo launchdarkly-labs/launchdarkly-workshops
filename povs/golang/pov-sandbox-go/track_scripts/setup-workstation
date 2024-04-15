@@ -30,3 +30,6 @@ echo "export LD_SDK_KEY=${LD_SDK_KEY}" >> ~/.bashrc
 cd /opt/ld/flag
 echo "project_key = \"${LD_PROJECT_KEY}\"" > terraform.tfvars
 terraform apply -auto-approve
+
+echo "export PATH=\$PATH:/usr/local/go/bin" >> ~/.profile
+echo "export PATH=\$PATH:/usr/local/go/bin" >> ~/.bashrc

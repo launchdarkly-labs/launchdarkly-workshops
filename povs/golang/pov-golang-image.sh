@@ -23,8 +23,8 @@ npm install -g npm@latest
 wget -O golang.tar.gz https://go.dev/dl/go1.22.2.linux-amd64.tar.gz
 tar -C /usr/local -xzf golang.tar.gz
 rm golang.tar.gz
-echo "export export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
-echo "export export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc
+echo "export PATH=\$PATH:/usr/local/go/bin" >> ~/.profile
+echo "export PATH=\$PATH:/usr/local/go/bin" >> ~/.bashrc
 
 mkdir -p /opt/golang
 cd /opt/golang
