@@ -1,0 +1,26 @@
+slug: pov-sandbox-nodejs
+id: 8jlykdhepkpk
+title: PoV Sandbox - NodeJS
+teaser: PoV Sandbox for NodeJS environments
+description: |-
+  Quickly learn how to use LaunchDarkly in a
+  Node environment. Use the example code or
+  create or bring your own code.
+icon: https://launchdarkly.com/favicon-dark-mode.png
+tags:
+- pov
+- react
+owner: launchdarkly
+developers:
+- kcochran@launchdarkly.com
+show_timer: true
+idle_timeout: 1200
+timelimit: 7200
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+  extend_ttl: 3600
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "12522876965012216634"
