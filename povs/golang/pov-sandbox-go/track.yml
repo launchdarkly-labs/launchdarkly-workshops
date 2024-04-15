@@ -1,4 +1,5 @@
 slug: pov-sandbox-go
+id: 3sqqwi5xnzeh
 title: PoV Sandbox - Go
 teaser: PoV Sandbox for Go environments
 description: |-
@@ -7,9 +8,9 @@ description: |-
   create or bring your own code.
 icon: https://launchdarkly.com/favicon-dark-mode.png
 tags:
-- golang
-- go
 - pov
+- go
+- golang
 owner: launchdarkly
 developers:
 - kcochran@launchdarkly.com
@@ -23,3 +24,4 @@ lab_config:
   extend_ttl: 3600
   feedback_recap_enabled: true
   loadingMessages: true
+checksum: "16499476940611002211"

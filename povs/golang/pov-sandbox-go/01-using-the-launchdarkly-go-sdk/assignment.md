@@ -1,5 +1,6 @@
 ---
 slug: using-the-launchdarkly-go-sdk
+id: 4wc1i8zqzvvq
 type: challenge
 title: Using the LaunchDarkly Go SDK
 teaser: Getting started with the LaunchDarkly SDK is easy. This track provides you
