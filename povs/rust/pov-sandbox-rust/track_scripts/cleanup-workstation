@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /opt/ld/terraform-ld-student
+terraform destroy -auto-approve
