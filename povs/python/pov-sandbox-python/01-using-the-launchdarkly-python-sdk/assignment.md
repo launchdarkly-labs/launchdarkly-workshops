@@ -7,7 +7,7 @@ teaser: Getting started with the LaunchDarkly SDK is easy. This track provides y
   with a Python environment which is ready to go!
 notes:
 - type: text
-  contents: Are you ready to being your PoV? This environment provides you with everything
+  contents: Are you ready to begin your PoV? This environment provides you with everything
     you need to see exactly how the LaunchDarkly Python SDK can work for you.
 tabs:
 - title: Code Editor
