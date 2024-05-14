@@ -219,6 +219,11 @@ resource "aws_s3_bucket_acl" "appdevbucket" {
 resource "aws_s3_bucket_policy" "publicbucket" {
   bucket = aws_s3_bucket.appdevbucket.id
   policy = data.aws_iam_policy_document.publicbucket.json
+  
+  depends_on = [
+    aws_s3_bucket_public_access_block.appdevbucket,
+    aws_s3_bucket_ownership_controls.appdevbucket
+  ]
 }
 
 data "aws_iam_policy_document" "publicbucket" {
