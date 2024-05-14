@@ -11,32 +11,62 @@ wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /etc/apt/keyr
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 apt-get -y update
 apt-get -y autoremove
-apt-get -y install nuget unzip jq git curl gnupg ca-certificates terraform vim awscli
+apt-get -y install nuget unzip jq git curl gnupg ca-certificates terraform vim
 
 # Cleanup and install NodeJS
 apt-get install -y nodejs
 npm install -g npm@latest
 
-# Install Java / kotlin / maven / gradle
-apt-get -y install openjdk-19-jdk-headless kotlin maven
-cd /opt
-wget https://services.gradle.org/distributions/gradle-8.7-bin.zip
-unzip gradle-8.7-bin.zip
-ln -s /opt/gradle-8.7 /opt/gradle
-export GRADLE_HOME=/opt/gradle
-export PATH=${GRADLE_HOME}/bin:${PATH}
-echo "export GRADLE_HOME=/opt/gradle" >> /root/.profile
-echo "export PATH=${GRADLE_HOME}/bin:${PATH}" >> /root/.profile
-echo "export GRADLE_HOME=/opt/gradle" >> /root/.bashrc
-echo "export PATH=${GRADLE_HOME}/bin:${PATH}" >> /root/.bashrc
-rm gradle-8.7-bin.zip
+######################
+# Install C++ tools
+######################
 
-# setup sample app
-mkdir -p /opt/java
-cd /opt/java
-git clone https://github.com/launchdarkly-labs/ld-sample-app-java.git
-cd /opt/java/ld-sample-app-java
-mvn clean package
+apt-get install -y gcc g++ cmake libjsoncpp-dev uuid-dev zlib1g-dev openssl libssl-dev libpthread-stubs0-dev
+
+# Install Drogon
+mkdir -p /opt/tools
+cd /opt/tools
+git clone https://github.com/drogonframework/drogon.git
+cd drogon
+git submodule update --init
+mkdir build
+cd build
+cmake ..
+make && make install
+
+# Install Boost
+wget -O boost.tar.gz https://boostorg.jfrog.io/artifactory/main/release/1.82.0/source/boost_1_82_0.tar.gz
+tar -C /usr/local -xzf boost.tar.gz
+rm boost.tar.gz
+echo "export BOOST_ROOT=\"/usr/local/boost_1_82_0\"" >> ~/.profile
+echo "export BOOST_ROOT=\"/usr/local/boost_1_82_0\"" >> ~/.bashrc
+export BOOST_ROOT="/usr/local/boost_1_82_0"
+mv /usr/include/boost /usr/include/boost_old
+cp -R /usr/local/boost_1_82_0/boost /usr/include/
+cd /usr/local/boost_1_82_0
+./bootstrap.sh
+./b2 install
+
+# Install LaunchDarkly SDK
+cd /opt/tools
+git clone https://github.com/launchdarkly/cpp-sdks.git
+cd cpp-sdks
+mkdir build
+cd build
+cmake ..
+cmake --build .
+cmake --install .
+
+# echo "add_subdirectory(cpp-sdks)" >> CMakeLists.txt
+# echo "target_link_libraries(TestApp PRIVATE launchdarkly::server)" >> CMakeLists.txt
+
+
+mkdir -p /opt/cpp
+cd /opt/cpp
+git clone https://github.com/launchdarkly-labs/ld-sample-app-cpp.git
+cd ld-sample-app-cpp
+
+######################
 
 # clone the Terraform code to generate user
 mkdir -p /opt/ld
@@ -70,7 +100,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=root
-ExecStart=/usr/bin/code-server --host 0.0.0.0 --port 8080 --auth none /opt/java/
+ExecStart=/usr/bin/code-server --host 0.0.0.0 --port 8080 --auth none /opt/cpp/
 
 [Install]
 WantedBy=multi-user.target

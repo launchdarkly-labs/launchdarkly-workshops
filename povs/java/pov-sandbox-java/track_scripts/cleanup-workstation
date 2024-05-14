@@ -1,4 +1,7 @@
 #!/bin/bash
 
+cd /opt/ld/flag
+terraform destroy -auto-approve
+
 cd /opt/ld/terraform-ld-student
 terraform destroy -auto-approve

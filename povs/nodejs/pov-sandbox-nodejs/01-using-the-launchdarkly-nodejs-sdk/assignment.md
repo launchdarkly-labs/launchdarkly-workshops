@@ -20,6 +20,7 @@ tabs:
 - title: Shell
   type: terminal
   hostname: workstation
+  workdir: /opt/nodejs
 difficulty: basic
 timelimit: 600
 ---

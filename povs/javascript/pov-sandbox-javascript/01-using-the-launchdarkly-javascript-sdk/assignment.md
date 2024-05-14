@@ -24,6 +24,7 @@ tabs:
 - title: Shell
   type: terminal
   hostname: workstation
+  workdir: /opt/javascript
 difficulty: basic
 timelimit: 600
 ---

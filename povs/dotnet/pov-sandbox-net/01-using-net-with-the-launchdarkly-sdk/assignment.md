@@ -20,6 +20,7 @@ tabs:
 - title: Shell
   type: terminal
   hostname: workstation
+  workdir: /opt/dotnet
 difficulty: basic
 timelimit: 600
 ---

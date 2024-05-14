@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Delete mobile app
+curl -s -X DELETE \
+  -H "Content-Type: application/json" \
+  -H 'Authorization: Basic dG9rX2p6cmlqYXB1N2J1Z3kyeW56aGEyaXJ2ejRxOg==' \
+  https://api.appetize.io/v1/apps/${APPETIZE_APP_ID}
+
+
+cd /opt/ld/flag
+terraform destroy -auto-approve
+
+cd /opt/ld/terraform-ld-student
+terraform destroy -auto-approve

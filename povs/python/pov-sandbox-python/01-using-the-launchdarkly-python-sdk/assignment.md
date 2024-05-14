@@ -20,6 +20,7 @@ tabs:
 - title: Shell
   type: terminal
   hostname: workstation
+  workdir: /opt/python
 difficulty: basic
 timelimit: 600
 ---

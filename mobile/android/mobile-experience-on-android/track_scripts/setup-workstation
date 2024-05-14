@@ -1,0 +1,107 @@
+#!/bin/bash
+
+set -euo pipefail
+
+until [ -f /opt/instruqt/bootstrap/host-bootstrap-completed ]; do
+    echo "Waiting for instruqt bootstrap to complete"
+    sleep 1
+done
+
+export GRADLE_HOME=/opt/gradle
+export PATH=${GRADLE_HOME}/bin:${PATH}
+export ANDROID_HOME="/usr/lib/android-sdk"
+echo "export GRADLE_HOME=/opt/gradle" >> /root/.profile
+echo "export PATH=${GRADLE_HOME}/bin:${PATH}" >> /root/.profile
+echo "export ANDROID_HOME=\"/usr/lib/android-sdk\"" >> /root/.profile
+echo "export GRADLE_HOME=/opt/gradle" >> /root/.bashrc
+echo "export PATH=${GRADLE_HOME}/bin:${PATH}" >> /root/.bashrc
+echo "export ANDROID_HOME=\"/usr/lib/android-sdk\"" >> /root/.bashrc
+
+
+cd /opt/ld/terraform-ld-student
+echo "sandbox_id = \"${_SANDBOX_ID}\"" > terraform.tfvars
+terraform apply -auto-approve
+export LD_PROJECT_KEY="$(terraform output -json | jq -r '.students.value[0].project_key')"
+echo "export LD_PROJECT_KEY=\"$LD_PROJECT_KEY\"" >> ~/.profile
+echo "export LD_PROJECT_KEY=\"$LD_PROJECT_KEY\"" >> ~/.bashrc
+
+export LD_CLIENT_KEY=$(curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/projects/'${LD_PROJECT_KEY}'/environments/test' \
+  -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'' | jq -r ._id)
+echo "export LD_CLIENT_KEY=${LD_CLIENT_KEY}" >> ~/.profile
+echo "export LD_CLIENT_KEY=${LD_CLIENT_KEY}" >> ~/.bashrc
+export LD_SDK_KEY=$(curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/projects/'${LD_PROJECT_KEY}'/environments/test' \
+  -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'' | jq -r .apiKey)
+echo "export LD_SDK_KEY=${LD_SDK_KEY}" >> ~/.profile
+echo "export LD_SDK_KEY=${LD_SDK_KEY}" >> ~/.bashrc
+export LD_MOBILE_KEY=$(curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/projects/'${LD_PROJECT_KEY}'/environments/test' \
+  -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'' | jq -r .mobileKey)
+echo "export LD_MOBILE_KEY=${LD_MOBILE_KEY}" >> ~/.profile
+echo "export LD_MOBILE_KEY=${LD_MOBILE_KEY}" >> ~/.bashrc
+
+echo "ACCESS KEY ID: ${AWS_ACCESS_KEY_ID}"
+
+cd /opt/ld/flag
+echo "project_key = \"${LD_PROJECT_KEY}\"" > terraform.tfvars
+echo "sandbox_id = \"${_SANDBOX_ID}\"" >> terraform.tfvars
+terraform apply -auto-approve
+terraform output -json > tf.txt
+export TEMP_AWS_ACCESS_KEY_ID=`cat tf.txt | jq -r .access_key_id.value`
+export TEMP_AWS_SECRET_ACCESS_KEY=`cat tf.txt | jq -r .access_secret.value`
+export AWS_BUCKET_NAME=`cat tf.txt | jq -r .bucket_name.value`
+echo "export AWS_BUCKET_NAME=${AWS_BUCKET_NAME}" >> ~/.profile
+echo "export AWS_BUCKET_NAME=${AWS_BUCKET_NAME}" >> ~/.bashrc
+
+mkdir -p /root/.aws
+cat <<EOF > /root/.aws/credentials
+[default]
+aws_access_key_id=${TEMP_AWS_ACCESS_KEY_ID}
+aws_secret_access_key=${TEMP_AWS_SECRET_ACCESS_KEY}
+EOF
+
+###################
+# Get repo updates
+###################
+cd /opt/java/test-calculator-android
+git pull
+sed -i -e 's/LD_MOBILE_KEY/'$LD_MOBILE_KEY'/g' /opt/java/test-calculator-android/app/src/main/res/values/strings.xml
+gradle build
+
+cd /opt/java/test-calculator-android/app/build/outputs/apk/release
+aws s3 cp ./app-release-unsigned.apk s3://$AWS_BUCKET_NAME
+
+cd /root
+
+curl -s -X POST \
+  -H "Content-Type: application/json" \
+  -H 'Authorization: Basic dG9rX2p6cmlqYXB1N2J1Z3kyeW56aGEyaXJ2ejRxOg==' \
+  --data '{ "platform": "android", "note": "Managed by LaunchDarkly", "url": "https://'$AWS_BUCKET_NAME'.s3.amazonaws.com/app-release-unsigned.apk" }' \
+  https://api.appetize.io/v1/apps > .mobileapp.json
+
+export APPETIZE_APP_ID=`cat .mobileapp.json | jq -r .publicKey`
+echo "export APPETIZE_APP_ID=${APPETIZE_APP_ID}" >> ~/.profile
+echo "export APPETIZE_APP_ID=${APPETIZE_APP_ID}" >> ~/.bashrc
+
+cd /opt/java/mobile-control-app
+git pull
+sed -i -e 's/MOBILE_APP_PUBLIC_KEY/'$APPETIZE_APP_ID'/g' /opt/java/mobile-control-app/js/config.js
+
+# Script to build and deploy the mobile app
+cat <<-EOF > /opt/java/build.sh
+echo "Building the app..."
+cd /opt/java/test-calculator-android
+gradle build
+echo "Updating the app..."
+cd /opt/java/test-calculator-android/app/build/outputs/apk/release
+aws s3 cp ./app-release-unsigned.apk s3://\$AWS_BUCKET_NAME
+curl -s -X POST \
+  -H "Content-Type: application/json" \
+  -H 'Authorization: Basic dG9rX2p6cmlqYXB1N2J1Z3kyeW56aGEyaXJ2ejRxOg==' \
+  --data '{ "platform": "android", "note": "Managed by LaunchDarkly", "url": "https://'\$AWS_BUCKET_NAME'.s3.amazonaws.com/app-release-unsigned.apk" }' \
+  https://api.appetize.io/v1/apps/\$APPETIZE_APP_ID > /dev/null
+echo ""
+echo "Done!"
+EOF
+chmod +x /opt/java/build.sh

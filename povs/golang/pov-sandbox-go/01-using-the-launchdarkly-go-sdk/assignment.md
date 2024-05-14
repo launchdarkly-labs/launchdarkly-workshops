@@ -20,6 +20,7 @@ tabs:
 - title: Shell
   type: terminal
   hostname: workstation
+  workdir: /opt/golang
 difficulty: basic
 timelimit: 600
 ---
