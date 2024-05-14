@@ -173,7 +173,7 @@ resource "launchdarkly_feature_flag" "release_storefront_flag" {
 
   client_side_availability {
     using_environment_id = true
-    using_mobile_key     = false
+    using_mobile_key     = true
   }
 
   defaults {

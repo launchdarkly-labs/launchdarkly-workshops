@@ -94,12 +94,12 @@ echo "Building the app..."
 cd /opt/java/test-calculator-android
 gradle build
 echo "Updating the app..."
-cd /opt/java/test-calculator-android/app/build/outputs/apk/release
-aws s3 cp ./app-release-unsigned.apk s3://\$AWS_BUCKET_NAME
+cd /opt/java/test-calculator-android/app/build/outputs/apk/debug
+aws s3 cp ./app-debug.apk s3://\$AWS_BUCKET_NAME
 curl -s -X POST \
   -H "Content-Type: application/json" \
   -H 'Authorization: Basic dG9rX2p6cmlqYXB1N2J1Z3kyeW56aGEyaXJ2ejRxOg==' \
-  --data '{ "platform": "android", "note": "Managed by LaunchDarkly", "url": "https://'\$AWS_BUCKET_NAME'.s3.amazonaws.com/app-release-unsigned.apk" }' \
+  --data '{ "platform": "android", "note": "Managed by LaunchDarkly", "url": "https://'\$AWS_BUCKET_NAME'.s3.amazonaws.com/app-debug.apk" }' \
   https://api.appetize.io/v1/apps/\$APPETIZE_APP_ID > /dev/null
 echo ""
 echo "Done!"
