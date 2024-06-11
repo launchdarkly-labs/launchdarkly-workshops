@@ -37,18 +37,20 @@ The frontend changes (made available by the **Updated Billing IU** flag) don't w
 # Add a Prerequisite
 
 1. Switch to the [LaunchDarkly](#tab-0) tab.
-1. From the left-hand navigation menu, click **Feature Flags**
+1. From the left-hand navigation menu, click **Flags**
 1. Click **Updated Billing UI**
-1. Click **+ Add rules** and choose **Set prerequisites**
+1. Click **+ Add rule** and choose **Set prerequisites**
 1. From the **Flag** dropdown, select *Migrate to Stripe API*
 1. Make sure **Variation** is set to *Stripe Checkout Enabled*
 1. Click **Review and save**, then **Save changes**
 
 Both the **Updated Billing UI** and the **Migrate to Stripe API** flags should already be off. So let's try the same scenario we did in the previous challenge.
 
-1. From the left-hand navigation menu, click **Feature Flags**
-1. Locate the **Updated Billing UI** flag and toggle the flag to **On**
-1. Click **Save changes**
+1. From the left-hand navigation menu, click **Flags**
+1. Click **Updated Billing UI**.
+1. Click the On/Off toggle at the top left to turn the flag **On**.
+1. Click **Review and save**, then **Save changes**.
+1. From the left-hand navigation menu, click **Flags** again.
 1. Verify the **Migrate to Stripe API** flag is, in fact, set to **Off**
 1. Switch over to the [Toggle Outfitters](#tab-1) tab.
 1. Login as **ron**, **leslie**, **april**, or **andy**.
@@ -56,8 +58,9 @@ Both the **Updated Billing UI** and the **Migrate to Stripe API** flags should a
 You can see that even though the new shopping cart is enabled, it's not showing on our site! Since we made it mandatory that the **Migrate to Stripe API** be on, the **Updated Billing UI** will be not even be evaluated until that condition is met.
 
 1. Switch back to the [LaunchDarkly](#tab-0) tab.
-1. Locate the **Migrate to Stripe API** flag and toggle the flag to **On**
-1. Click **Save changes**
+1. Click **Migrate to Stripe API**.
+1. Click the On/Off toggle at the top left to turn the flag **On**.
+1. Click **Review and save**, then **Save changes**.
 1. Finally, switch over to the [Toggle Outfitters](#tab-1) tab.
 
 Now the shopping cart is available AND you are able to add an item to your cart!

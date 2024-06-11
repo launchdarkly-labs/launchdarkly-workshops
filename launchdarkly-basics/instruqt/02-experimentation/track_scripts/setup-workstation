@@ -27,15 +27,6 @@ export LD_SDK_KEY=$(curl -s -X GET \
 echo "export LD_SDK_KEY=${LD_SDK_KEY}" >> ~/.profile
 echo "export LD_SDK_KEY=${LD_SDK_KEY}" >> ~/.bashrc
 
-echo "export PATH=\$PATH:/root/.cargo/bin" >> ~/.profile
-echo "export PATH=\$PATH:/root/.cargo/bin" >> ~/.bashrc
-
-cd /opt/ld/flag
-echo "project_key = \"${LD_PROJECT_KEY}\"" > terraform.tfvars
-terraform apply -auto-approve
-
-###################
-# Get repo updates
-###################
-cd /opt/rust/ld-sample-app-rust
-git pull
+mv /opt/ld/talkin-ship-workshop-experimentation-app/.env.example /opt/ld/talkin-ship-workshop-experimentation-app/.env
+sed -i 's/^LD_SDK_KEY\=.*/LD_SDK_KEY\='\'${LD_SDK_KEY}\''/g' /opt/ld/talkin-ship-workshop-experimentation-app/.env
+sed -i 's/^NEXT_PUBLIC_LD_CLIENT_KEY\=.*/NEXT_PUBLIC_LD_CLIENT_KEY\='\'${LD_CLIENT_KEY}\''/g' /opt/ld/talkin-ship-workshop-experimentation-app/.env

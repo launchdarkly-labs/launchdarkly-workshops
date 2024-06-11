@@ -97,9 +97,9 @@ export default useErrorHandling;
 # Update Flag Settings
 
 1. Switch over to the [LaunchDarkly](#tab-0) tab.
-1. Click **Feature Flags** in the left navigation menu.
+1. Click **Flags** in the left navigation menu.
 1. Click **Updated Billing IU**.
-1. In the upper navigation menu, click **Settings**
+1. Move your mouse over the **Test** environment box in the upper-left under the flag name, click the three dots, then click **Configure flag environment**.
 1. In the **Triggers** section, click **+ Add trigger**
 1. Select the following values:
    1. **Trigger type**: Generic trigger
@@ -119,9 +119,10 @@ export default useErrorHandling;
 With our trigger in place, let's reproduce the error we encountered in our fourth challenge.
 
 1. Switch back over to the [LaunchDarkly](#tab-0) tab.
-1. Click **Feature Flags** in the left navigation menu.
-1. Locate the **Migrate to Stripe API** flag and toggle the flag to **Off**
-1. Click **Save changes**
+1. Click **Flags** in the left navigation menu.
+1. Click **Migrate to Stripe API**.
+1. Click the On/Off toggle at the top left to turn the flag **Off**.
+1. Click **Review and save**, then **Save changes**.
 1. Finally, switch over to the [Toggle Outfitters](#tab-1) tab.
 1. Login as **ron**, **leslie**, **april**, or **andy**.
 1. Click *Add to Cart*

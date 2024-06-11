@@ -1,5 +1,13 @@
 #!/bin/bash
 
+###########################
+# Versions to keep updated
+# 
+# * NodeJS
+###########################
+
+
+export HOME=/root
 export DEBIAN_FRONTEND=noninteractive
 apt-get -y update
 
@@ -52,7 +60,7 @@ EOF
 curl -fsSL https://code-server.dev/install.sh | sh
 
 # Create Code Server startup script
-cat <<-EOF > /etc/systemd/system/code-server.service
+cat > /etc/systemd/system/code-server.service <<-EOF
 [Unit]
 Description=Code Server
 After=network.target
@@ -76,7 +84,7 @@ systemctl start code-server
 # code-server --install-extension ms-python.python --user-data-dir /user-data
 
 mkdir /opt/ld/flag
-cat <<-EOF > /opt/ld/flag/main.tf
+cat > /opt/ld/flag/main.tf <<-EOF
 terraform {
   required_providers {
     launchdarkly = {

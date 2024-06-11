@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# FLAG_DATA=$(curl -s -X GET \
+#   'https://app.launchdarkly.com/api/v2/flags/'${LD_PROJECT_KEY}'/release-updated-storefront' \
+#   -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'')
+
+# curl -i -X PATCH \
+#   'https://app.launchdarkly.com/api/v2/flags/'${LD_PROJECT_KEY}'/release-updated-storefront' \
+#   -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'' \
+#   -H 'Content-Type: application/json;domain-model=launchdarkly.semanticpatch' \
+#   -d '{ "instructions": [ { "kind": "turnOnClientSideAvailability", "value": "usingEnvironmentId" } ] }'
+
+exit 0
+

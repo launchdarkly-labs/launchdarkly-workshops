@@ -1,13 +1,5 @@
 #!/bin/bash
 
-###########################
-# Versions to keep updated
-# 
-# * NodeJS
-# * Dotnet
-###########################
-
-export HOME=/root
 export DEBIAN_FRONTEND=noninteractive
 apt-get -y update
 
@@ -21,24 +13,9 @@ apt-get -y update
 apt-get -y autoremove
 apt-get -y install nuget unzip jq git curl gnupg ca-certificates terraform vim
 
-# Install NodeJS for signing SSO
+# Cleanup and install NodeJS
 apt-get install -y nodejs
 npm install -g npm@latest
-
-# Install dotnet
-apt-get install -y dotnet-sdk-7.0
-mkdir -p /opt/dotnet/webapp
-cd /opt/dotnet/webapp
-# export HOME=/root
-dotnet new razor
-dotnet add package LaunchDarkly.ServerSdk --version 8.0.0
-dotnet add package Microsoft.AspNetCore.OpenApi --version 7.0.15
-dotnet add package Swashbuckle.AspNetCore
-
-cd /opt/dotnet
-git clone https://github.com/launchdarkly-labs/ld-sample-app-dotnet.git
-cd ld-sample-app-dotnet
-dotnet build
 
 # clone the Terraform code to generate user
 mkdir -p /opt/ld
@@ -46,6 +23,37 @@ cd /opt/ld
 git clone https://github.com/kevincloud/terraform-ld-student.git
 cd /opt/ld/terraform-ld-student
 terraform init
+
+# clone our code repo
+cd /opt/ld
+git clone https://github.com/launchdarkly-labs/talkin-ship-workshop-experimentation-app.git
+cd /opt/ld/talkin-ship-workshop-experimentation-app
+# curl -o .env https://talkin-ship-workshop.s3.us-east-2.amazonaws.com/example.env
+# npm run build
+npm install
+cd /root
+
+# Create Code Server startup script
+cat <<-EOF > /etc/systemd/system/galaxystore.service
+[Unit]
+Description=Galaxy Store
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Environment=NODE_PORT=3000
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+WorkingDirectory=/opt/ld/talkin-ship-workshop-experimentation-app
+ExecStart=npm run dev
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Start Galaxy Store app
+systemctl enable galaxystore
+systemctl start galaxystore
 
 # Install code editor
 mkdir -p /root/.local/share/code-server/User
@@ -61,7 +69,7 @@ EOF
 curl -fsSL https://code-server.dev/install.sh | sh
 
 # Create Code Server startup script
-cat > /etc/systemd/system/code-server.service <<-EOF
+cat <<-EOF > /etc/systemd/system/code-server.service
 [Unit]
 Description=Code Server
 After=network.target
@@ -72,7 +80,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=root
-ExecStart=/usr/bin/code-server --host 0.0.0.0 --port 8080 --auth none /opt/dotnet/
+ExecStart=/usr/bin/code-server --host 0.0.0.0 --port 8080 --auth none /opt/ld/talkin-ship-workshop-experimentation-app
 
 [Install]
 WantedBy=multi-user.target
@@ -83,55 +91,3 @@ systemctl enable code-server
 systemctl start code-server
 
 # code-server --install-extension ms-python.python --user-data-dir /user-data
-
-mkdir /opt/ld/flag
-cat > /opt/ld/flag/main.tf <<-EOF
-terraform {
-  required_providers {
-    launchdarkly = {
-      source  = "launchdarkly/launchdarkly"
-      version = "~>2.15"
-    }
-  }
-}
-
-variable "project_key" {
-}
-
-provider "launchdarkly" {
-}
-
-resource "launchdarkly_feature_flag" "release_storefront_flag" {
-  project_key = var.project_key
-  key         = "test-flag"
-  name        = "Test Flag"
-
-  variation_type = "boolean"
-
-  variations {
-    value = "true"
-    name  = "True"
-  }
-  variations {
-    value = "false"
-    name  = "False"
-  }
-
-  client_side_availability {
-    using_environment_id = true
-    using_mobile_key     = false
-  }
-
-  defaults {
-    on_variation  = 0
-    off_variation = 1
-  }
-
-  tags = [
-    "managed-by-terraform"
-  ]
-}
-EOF
-
-cd /opt/ld/flag
-terraform init

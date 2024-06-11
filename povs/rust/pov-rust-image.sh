@@ -1,5 +1,11 @@
 #!/bin/bash
 
+###########################
+# Versions to keep updated
+# 
+# * NodeJS
+###########################
+
 export DEBIAN_FRONTEND=noninteractive
 apt-get -y update
 
@@ -11,7 +17,7 @@ wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /etc/apt/keyr
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 apt-get -y update
 apt-get -y autoremove
-apt-get -y install unzip jq git curl gnupg ca-certificates terraform vim
+apt-get -y install unzip jq git curl gnupg ca-certificates terraform vim build-essential
 
 # Cleanup and install NodeJS
 apt-get install -y nodejs
@@ -20,15 +26,15 @@ npm install -g npm@latest
 # Install Rust
 ######################
 
-apt-get install -y rustc cargo
+curl https://sh.rustup.rs -sSf | sh -s -- -y
+export PATH=$PATH:/root/.cargo/bin
 cargo install cargo-watch
-echo "export PATH=\$PATH:/root/.cargo/bin" >> ~/.profile
-echo "export PATH=\$PATH:/root/.cargo/bin" >> ~/.bashrc
 
 mkdir -p /opt/rust
 cd /opt/rust
 git clone https://github.com/launchdarkly-labs/ld-sample-app-rust.git
 cd ld-sample-app-rust
+cargo build
 
 ######################
 
@@ -53,7 +59,7 @@ EOF
 curl -fsSL https://code-server.dev/install.sh | sh
 
 # Create Code Server startup script
-cat <<-EOF > /etc/systemd/system/code-server.service
+cat > /etc/systemd/system/code-server.service <<-EOF
 [Unit]
 Description=Code Server
 After=network.target
@@ -77,7 +83,7 @@ systemctl start code-server
 # code-server --install-extension ms-python.python --user-data-dir /user-data
 
 mkdir /opt/ld/flag
-cat <<-EOF > /opt/ld/flag/main.tf
+cat > /opt/ld/flag/main.tf <<-EOF
 terraform {
   required_providers {
     launchdarkly = {

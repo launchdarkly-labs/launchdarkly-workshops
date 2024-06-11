@@ -32,7 +32,7 @@ In our previous challenge, we implemented a shopping cart for our frontend. Howe
 
 # Create the API Flag
 
-1. From the left-hand navigation menu, click **Feature Flags**
+1. From the left-hand navigation menu, click **Flags**
 2. Click the **Create flag** button in the upper right-hand corner
 3. For **Name**, enter:
 ```js
@@ -52,7 +52,7 @@ Stripe Checkout Disabled
 
 As we've seen in previous challenges, our new code will be disabled whether the flag is on or off. In order to allow our Developers to test the new feature, let's add targeting to our new flag.
 
-1. Click **+ Add rules** and choose **Target segments**
+1. Click **+ Add rule** and choose **Target segments**
 1. From the **Segments** dropdown, select *Developers*
 1. From the **Rollout** dropdown, select *Stripe Checkout Enabled*
 1. Toggle the flag to **On** in the upper left
@@ -96,9 +96,10 @@ To complete our migration and rollout our new API, we need to add the new functi
 We previously turned off our **Updated Billing UI** flag due to errors, but if we refactored our code properly, it should work now. Let's go ahead and turn that back on since we've added the API component.
 
 1. Switch back to the [LaunchDarkly](#tab-0) tab
-1. From the left-hand navigation menu, click **Feature Flags**
-1. To the right of the **Updated Billing UI**, toggle the On/Off switch to **On**
-1. Click **Save changes**
+1. From the left-hand navigation menu, click **Flags**
+1. Click **Updated Billing UI**
+1. Click the On/Off toggle at the top left to turn the flag **On**.
+1. Click **Review and save**, then **Save changes**.
 
 Switch to the [Toggle Outfitters](#tab-1) tab, login as **ron**, **leslie**, **april**, or **andy** and you will now be able to click *Add to Cart* successfully!
 

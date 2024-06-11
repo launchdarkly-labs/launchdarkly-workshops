@@ -1,0 +1,26 @@
+slug: introduction-to-experimentation
+id: mguoaoshtamn
+title: Introduction to Experimentation
+teaser: Learn the basics of experimentation with LaunchDarkly
+description: |-
+  Understanding how our customers interact with our software
+  is crucial to success. In this track, you'll learn how simple
+  it is to run experiments with LaunchDarkly and how to use
+  the data to make informed decisions.
+icon: https://launchdarkly.com/favicon-dark-mode.png
+tags:
+- experimentation
+owner: launchdarkly
+developers:
+- kcochran@launchdarkly.com
+show_timer: true
+idle_timeout: 300
+timelimit: 7200
+lab_config:
+  overlay: false
+  width: 25
+  position: right
+  extend_ttl: 3600
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "3437850789812373846"

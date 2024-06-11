@@ -38,7 +38,7 @@ The first thing we want to do is release our minimally viable product. Currently
 
 Let's begin by creating a feature flag. This flag won't do much right now, but over the next few challenges, we'll incorporate this and other flags into an application and watch LaunchDarkly in action.
 
-1. From the left-hand navigation menu, click **Feature Flags**
+1. From the left-hand navigation menu, click **Flags**
 2. Click the **Create flag** button in the upper right-hand corner
 3. For **Name**, enter:
 ```js

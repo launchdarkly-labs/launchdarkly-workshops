@@ -33,7 +33,7 @@ Instead of building our own shopping cart, let's use an existing framework. This
 
 Let's start by creating a new flag to handle our new billing user interface:
 
-1. From the left-hand navigation menu, click **Feature Flags**
+1. From the left-hand navigation menu, click **Flags**
 2. Click the **Create flag** button in the upper right-hand corner
 3. For **Name**, enter:
 ```js
@@ -53,7 +53,7 @@ Self-hosted Form
 
 The settings we've created for this flag will prevent our new feature from being seen by everyone--whether the flag is on or off. But we do want our developers to begin testing the new feature, so let's add a targeting rule which just allows those in the Developers segment to use the new feature.
 
-1. Click **+ Add rules** and choose **Target segments**
+1. Click **+ Add rule** and choose **Target segments**
 1. From the **Segments** dropdown, select *Developers*
 1. From the **Rollout** dropdown, select *Enable Stripe*
 1. Toggle the On/Off flag to **On** in the upper left

@@ -23,4 +23,5 @@ lab_config:
   extend_ttl: 3600
   feedback_recap_enabled: true
   loadingMessages: true
-checksum: "7830780830517472019"
+  hideStopButton: false
+checksum: "4497859575381806464"
