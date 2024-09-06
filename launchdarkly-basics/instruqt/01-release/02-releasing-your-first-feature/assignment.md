@@ -10,14 +10,17 @@ notes:
     this works. You'll learn how to initialize the LaunchDarkly client-side SDK using
     React and how to get flag values in the code.
 tabs:
-- title: LaunchDarkly
+- id: u0u6nw93qvzm
+  title: LaunchDarkly
   type: browser
   hostname: launchdarkly
-- title: Toggle Outfitters
+- id: hb9yqx0hktov
+  title: Toggle Outfitters
   type: service
   hostname: workstation
   port: 3000
-- title: Code Editor
+- id: g2x3zdxkky0r
+  title: Code Editor
   type: service
   hostname: workstation
   port: 8080

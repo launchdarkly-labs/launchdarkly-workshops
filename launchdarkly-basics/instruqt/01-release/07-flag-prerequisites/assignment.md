@@ -10,14 +10,17 @@ notes:
     one or more flags must be operational before code with another flag can work properly.
     Prerequisites makes sure we can set those dependencies to avoid accidents.
 tabs:
-- title: LaunchDarkly
+- id: lkdos4z20o6s
+  title: LaunchDarkly
   type: browser
   hostname: launchdarkly
-- title: Toggle Outfitters
+- id: gpba4d6lsyoa
+  title: Toggle Outfitters
   type: service
   hostname: workstation
   port: 3000
-- title: Code Editor
+- id: oyuojji502il
+  title: Code Editor
   type: service
   hostname: workstation
   port: 8080

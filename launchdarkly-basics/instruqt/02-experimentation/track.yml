@@ -9,6 +9,7 @@ description: |-
   the data to make informed decisions.
 icon: https://launchdarkly.com/favicon-dark-mode.png
 tags:
+- official
 - experimentation
 owner: launchdarkly
 developers:
@@ -23,4 +24,9 @@ lab_config:
   extend_ttl: 3600
   feedback_recap_enabled: true
   loadingMessages: true
-checksum: "3437850789812373846"
+  lab_v2: true
+  theme:
+    name: modern-dark
+  override_challenge_layout: false
+  hideStopButton: false
+checksum: "11458010107171254676"

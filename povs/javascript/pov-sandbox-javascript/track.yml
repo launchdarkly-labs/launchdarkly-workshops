@@ -23,4 +23,9 @@ lab_config:
   extend_ttl: 3600
   feedback_recap_enabled: true
   loadingMessages: true
-checksum: "17108963347539954173"
+  hideStopButton: false
+  lab_v2: true
+  theme:
+    name: modern-dark
+  default_layout: AssignmentRight
+checksum: "3459714621431968243"

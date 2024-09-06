@@ -11,14 +11,17 @@ notes:
     want all of our users to see that. So let's provide a way to test in production
     before a full release.
 tabs:
-- title: LaunchDarkly
+- id: gyitnnyyf3ro
+  title: LaunchDarkly
   type: browser
   hostname: launchdarkly
-- title: Toggle Outfitters
+- id: aqgxy4rb7rtx
+  title: Toggle Outfitters
   type: service
   hostname: workstation
   port: 3000
-- title: Code Editor
+- id: s5vjzuzalhwc
+  title: Code Editor
   type: service
   hostname: workstation
   port: 8080

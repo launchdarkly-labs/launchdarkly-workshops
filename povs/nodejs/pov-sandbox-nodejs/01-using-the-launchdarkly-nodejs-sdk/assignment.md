@@ -10,19 +10,24 @@ notes:
   contents: Are you ready to begin your PoV? This environment provides you with everything
     you need to see exactly how the LaunchDarkly NodeJS SDK can work for you.
 tabs:
-- title: Code Editor
+- id: hxboph1ioo4j
+  title: Code Editor
   type: service
   hostname: workstation
   port: 8080
-- title: LaunchDarkly
+- id: tmmgg93tetvh
+  title: LaunchDarkly
   type: browser
   hostname: launchdarkly
-- title: Shell
+- id: vveicwtiwjhs
+  title: Shell
   type: terminal
   hostname: workstation
   workdir: /opt/nodejs
 difficulty: basic
 timelimit: 600
+lab_config:
+  custom_layout: '{"root":{"children":[{"leaf":{"tabs":["tmmgg93tetvh"],"activeTabId":"tmmgg93tetvh","size":37}},{"leaf":{"tabs":["hxboph1ioo4j","vveicwtiwjhs"],"activeTabId":"vveicwtiwjhs","size":37}},{"leaf":{"tabs":["assignment"],"activeTabId":"assignment","size":25}}],"orientation":"Horizontal"}}'
 ---
 # Success Criteria
 

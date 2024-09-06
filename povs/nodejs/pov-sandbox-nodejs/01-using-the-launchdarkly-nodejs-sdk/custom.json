@@ -1,0 +1,35 @@
+{
+    "root": {
+        "children": [
+            {
+                "leaf": {
+                    "tabs": [
+                        "tmmgg93tetvh"
+                    ],
+                    "activeTabId": "tmmgg93tetvh",
+                    "size": 32
+                }
+            },
+            {
+                "leaf": {
+                    "tabs": [
+                        "hxboph1ioo4j",
+                        "vveicwtiwjhs"
+                    ],
+                    "activeTabId": "vveicwtiwjhs",
+                    "size": 32
+                }
+            },
+            {
+                "leaf": {
+                    "tabs": [
+                        "assignment"
+                    ],
+                    "activeTabId": "assignment",
+                    "size": 32
+                }
+            }
+        ],
+        "orientation": "Horizontal"
+    }
+}

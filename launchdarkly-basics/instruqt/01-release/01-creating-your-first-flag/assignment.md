@@ -11,14 +11,17 @@ notes:
     There's no need to redeploy or deal with extended outages. Simply flip a switch
     to return to the last known good state!
 tabs:
-- title: LaunchDarkly
+- id: stnyezn9ofpz
+  title: LaunchDarkly
   type: browser
   hostname: launchdarkly
-- title: Toggle Outfitters
+- id: sbrvy7na7sch
+  title: Toggle Outfitters
   type: service
   hostname: workstation
   port: 3000
-- title: Code Editor
+- id: dcvyxrfcfkjn
+  title: Code Editor
   type: service
   hostname: workstation
   port: 8080

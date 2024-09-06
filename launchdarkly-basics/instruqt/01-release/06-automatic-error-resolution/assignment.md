@@ -10,14 +10,17 @@ notes:
     flip of a toggle. But how can we let the system recover itself in the event of
     a problem?
 tabs:
-- title: LaunchDarkly
+- id: fabg4iite8ga
+  title: LaunchDarkly
   type: browser
   hostname: launchdarkly
-- title: Toggle Outfitters
+- id: eyp0j7xcc4ck
+  title: Toggle Outfitters
   type: service
   hostname: workstation
   port: 3000
-- title: Code Editor
+- id: jb0uaf2vbbsk
+  title: Code Editor
   type: service
   hostname: workstation
   port: 8080

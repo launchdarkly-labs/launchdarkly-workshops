@@ -10,14 +10,17 @@ notes:
     to reach out to us to place an order, but now we want to enable customers to order
     directly from our website without the need to talk to a representative.
 tabs:
-- title: LaunchDarkly
+- id: ozu1tzikycc3
+  title: LaunchDarkly
   type: browser
   hostname: launchdarkly
-- title: Toggle Outfitters
+- id: s2g5umo4jrca
+  title: Toggle Outfitters
   type: service
   hostname: workstation
   port: 3000
-- title: Code Editor
+- id: si2fve1qnu0j
+  title: Code Editor
   type: service
   hostname: workstation
   port: 8080

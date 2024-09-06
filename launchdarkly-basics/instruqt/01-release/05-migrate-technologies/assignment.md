@@ -9,14 +9,17 @@ notes:
   contents: Risky migrations are a thing of the past. Let LaunchDarkly help you safely
     and efficiently move from your legacy technology to your moderized workload.
 tabs:
-- title: LaunchDarkly
+- id: zrwsyzfuxcim
+  title: LaunchDarkly
   type: browser
   hostname: launchdarkly
-- title: Toggle Outfitters
+- id: cibzecc5t47s
+  title: Toggle Outfitters
   type: service
   hostname: workstation
   port: 3000
-- title: Code Editor
+- id: ehuou6wk4z79
+  title: Code Editor
   type: service
   hostname: workstation
   port: 8080

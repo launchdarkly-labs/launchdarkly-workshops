@@ -69,7 +69,7 @@ cat > /root/.local/share/code-server/User/settings.json <<-EOF
 {
     "workbench.colorTheme": "Default Dark+",
     "workbench.startupEditor": "none",
-    "security.workspace.trust.enabled": false,
+    "security.workspace.trust.enabled": false
 }
 EOF
 

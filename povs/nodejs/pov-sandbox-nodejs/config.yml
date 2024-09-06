@@ -4,7 +4,7 @@ virtualbrowsers:
   url: https://i3vcudz5ncoet6xkoaqxnos7mu0sdcpz.lambda-url.us-east-2.on.aws/?sandboxId=${_SANDBOX_ID}
 virtualmachines:
 - name: workstation
-  image: instruqt-launchdarkly/pov-image-nodejs
+  image: launchdarkly/image-pov-nodejs
   shell: /bin/bash
   machine_type: n1-standard-1
 secrets:

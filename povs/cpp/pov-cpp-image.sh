@@ -11,7 +11,7 @@ wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /etc/apt/keyr
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 apt-get -y update
 apt-get -y autoremove
-apt-get -y install nuget unzip jq git curl gnupg ca-certificates terraform vim
+apt-get -y install unzip jq git curl gnupg ca-certificates terraform vim
 
 # Cleanup and install NodeJS
 apt-get install -y nodejs
@@ -22,6 +22,8 @@ npm install -g npm@latest
 ######################
 
 apt-get install -y gcc g++ cmake libjsoncpp-dev uuid-dev zlib1g-dev openssl libssl-dev libpthread-stubs0-dev
+
+ln -s /usr/include/jsoncpp/json/ /usr/include/json
 
 # Install Drogon
 mkdir -p /opt/tools
@@ -47,24 +49,27 @@ cd /usr/local/boost_1_82_0
 ./bootstrap.sh
 ./b2 install
 
+# Install LaunchDarkly Sample App
+mkdir -p /opt/cpp
+cd /opt/cpp
+git clone https://github.com/launchdarkly-labs/ld-sample-app-cpp.git
+cd ld-sample-app-cpp
+
 # Install LaunchDarkly SDK
-cd /opt/tools
-git clone https://github.com/launchdarkly/cpp-sdks.git
 cd cpp-sdks
 mkdir build
 cd build
 cmake ..
 cmake --build .
 cmake --install .
+cd ..
 
-# echo "add_subdirectory(cpp-sdks)" >> CMakeLists.txt
-# echo "target_link_libraries(TestApp PRIVATE launchdarkly::server)" >> CMakeLists.txt
+# Build sample app
+mkdir build
+cd build
+cmake -D LD_BUILD_UNIT_TESTS=OFF ..
+cmake --build .
 
-
-mkdir -p /opt/cpp
-cd /opt/cpp
-git clone https://github.com/launchdarkly-labs/ld-sample-app-cpp.git
-cd ld-sample-app-cpp
 
 ######################
 
@@ -89,7 +94,7 @@ EOF
 curl -fsSL https://code-server.dev/install.sh | sh
 
 # Create Code Server startup script
-cat <<-EOF > /etc/systemd/system/code-server.service
+cat > /etc/systemd/system/code-server.service <<-EOF
 [Unit]
 Description=Code Server
 After=network.target
@@ -113,7 +118,7 @@ systemctl start code-server
 # code-server --install-extension ms-python.python --user-data-dir /user-data
 
 mkdir /opt/ld/flag
-cat <<-EOF > /opt/ld/flag/main.tf
+cat > /opt/ld/flag/main.tf <<-EOF
 terraform {
   required_providers {
     launchdarkly = {

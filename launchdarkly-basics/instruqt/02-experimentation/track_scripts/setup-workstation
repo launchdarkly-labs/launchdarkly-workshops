@@ -27,6 +27,22 @@ export LD_SDK_KEY=$(curl -s -X GET \
 echo "export LD_SDK_KEY=${LD_SDK_KEY}" >> ~/.profile
 echo "export LD_SDK_KEY=${LD_SDK_KEY}" >> ~/.bashrc
 
+# application SDK keys
 mv /opt/ld/talkin-ship-workshop-experimentation-app/.env.example /opt/ld/talkin-ship-workshop-experimentation-app/.env
 sed -i 's/^LD_SDK_KEY\=.*/LD_SDK_KEY\='\'${LD_SDK_KEY}\''/g' /opt/ld/talkin-ship-workshop-experimentation-app/.env
 sed -i 's/^NEXT_PUBLIC_LD_CLIENT_KEY\=.*/NEXT_PUBLIC_LD_CLIENT_KEY\='\'${LD_CLIENT_KEY}\''/g' /opt/ld/talkin-ship-workshop-experimentation-app/.env
+
+# create a context for experimentation
+curl -s -X PUT \
+    'https://app.launchdarkly.com/api/v2/projects/'${LD_PROJECT_KEY}'/context-kinds/audience' \
+    -H 'Content-Type: application/json' \
+    -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'' \
+    -H 'LD-API-Version: beta' \
+    -d '{ "name": "audience", "key": "audience", "description": "", "hideInTargeting": false }'
+
+curl -s -X PUT \
+    'https://app.launchdarkly.com/api/v2/projects/'${LD_PROJECT_KEY}'/experimentation-settings' \
+    -H 'Content-Type: application/json' \
+    -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'' \
+    -H 'LD-API-Version: beta' \
+    -d '{"randomizationUnits":[{"randomizationUnit":"audience","standardRandomizationUnit":"user","default":false},{"randomizationUnit":"user","standardRandomizationUnit":"user","default":true}]}'
