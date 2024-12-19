@@ -16,5 +16,6 @@ solution:
 - 2
 difficulty: basic
 timelimit: 600
+enhanced_loading: null
 ---
 How do we make sure our new code is only delivered to a specific audience?

@@ -25,6 +25,7 @@ tabs:
   port: 8080
 difficulty: basic
 timelimit: 600
+enhanced_loading: null
 ---
 
 # Lab 5
@@ -38,17 +39,17 @@ In our previous challenge, we implemented a shopping cart for our frontend. Howe
 1. From the left-hand navigation menu, click **Flags**
 2. Click the **Create flag** button in the upper right-hand corner
 3. For **Name**, enter:
-```js
+```text
 Migrate to Stripe API
 ```
 4. Under **Configuration**, select **Release**
 5. Under **Variations**:
    1. First **Name**:
-```js
+```text
 Stripe Checkout Enabled
 ```
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Second **Name**, enter:
-```js
+```text
 Stripe Checkout Disabled
 ```
 6. Click **Create flag** in the lower right-hand side of the screen.

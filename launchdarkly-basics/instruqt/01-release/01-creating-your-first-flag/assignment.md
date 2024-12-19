@@ -27,6 +27,7 @@ tabs:
   port: 8080
 difficulty: basic
 timelimit: 600
+enhanced_loading: null
 ---
 
 # Lab 1
@@ -44,16 +45,16 @@ Let's begin by creating a feature flag. This flag won't do much right now, but o
 1. From the left-hand navigation menu, click **Flags**
 2. Click the **Create flag** button in the upper right-hand corner
 3. For **Name**, enter:
-```js
+```text
 Release Updated Storefront
 ```
 4. Under **Variations**:
    1. First **Name**:
-```js
+```text
 Store Enabled
 ```
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Second **Name**:
-```js
+```text
 Store Disabled
 ```
 5. Click **Create flag** in the lower right-hand side of the screen.

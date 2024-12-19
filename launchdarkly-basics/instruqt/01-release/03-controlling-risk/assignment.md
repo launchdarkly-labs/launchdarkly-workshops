@@ -27,6 +27,7 @@ tabs:
   port: 8080
 difficulty: basic
 timelimit: 600
+enhanced_loading: null
 ---
 
 # Lab 3
@@ -41,7 +42,7 @@ To get started, switch to the [LaunchDarkly tab](#tab-0), and do the following:
 2. Click the **Create segment** button in the upper, right-hand corner.
 3. Select **Rule-based segments**
 4. In the **Name** field, enter:
-```js
+```text
 Developers
 ```
 5. Click **Save segment**.

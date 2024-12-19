@@ -19,16 +19,15 @@ developers:
 show_timer: true
 timelimit: 7200
 lab_config:
-  overlay: false
-  width: 25
-  position: right
   extend_ttl: 3600
   feedback_recap_enabled: true
+  feedback_tab_enabled: false
   loadingMessages: true
-  lab_v2: true
   theme:
     name: modern-dark
   override_challenge_layout: false
   hideStopButton: false
+  default_layout: AssignmentRight
   default_layout_sidebar_size: 25
-checksum: "10679784199754504618"
+checksum: "3693493880038358550"
+enhanced_loading: false

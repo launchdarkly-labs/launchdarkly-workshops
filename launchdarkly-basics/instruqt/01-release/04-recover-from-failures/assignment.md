@@ -26,6 +26,7 @@ tabs:
   port: 8080
 difficulty: basic
 timelimit: 600
+enhanced_loading: null
 ---
 
 # Lab 4
@@ -39,17 +40,17 @@ Let's start by creating a new flag to handle our new billing user interface:
 1. From the left-hand navigation menu, click **Flags**
 2. Click the **Create flag** button in the upper right-hand corner
 3. For **Name**, enter:
-```js
+```text
 Updated Billing UI
 ```
 4. Under **Configuration**, select **Release**
 5. Under **Variations**:
    1. First **Name**:
-```js
+```text
 Enable Stripe
 ```
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b. Second **Name**:
-```js
+```text
 Self-hosted Form
 ```
 6. Click **Create flag** in the lower right-hand side of the screen.

@@ -26,6 +26,7 @@ tabs:
   port: 8080
 difficulty: basic
 timelimit: 1200
+enhanced_loading: null
 ---
 
 # Lab 2
