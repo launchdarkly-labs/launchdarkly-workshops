@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+
+cd /opt/ld/instruqt-release-solve/challenge-03
+echo "project_key = \"${LD_PROJECT_KEY}\"" >> terraform.tfvars
+terraform init
+
+exit 0

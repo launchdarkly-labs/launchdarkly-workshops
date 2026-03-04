@@ -1,0 +1,27 @@
+#!/bin/bash
+
+curl -s -X POST \
+  'https://app.launchdarkly.com/api/v2/flags/'${LD_PROJECT_KEY}'' \
+  -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "key": "release-updated-storefront",
+    "name": "Release Updated Storefront",
+    "variations": [
+      {
+        "value": true,
+        "name": "Store Enabled"
+      },
+      {
+        "value": false,
+        "name": "Store Disabled"
+      }
+    ],
+    "clientSideAvailability": {
+      "usingEnvironmentId": true,
+      "usingMobileKey": true
+    }
+  }'
+
+
+exit 0

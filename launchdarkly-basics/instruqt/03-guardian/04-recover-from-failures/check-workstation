@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# 
+# Make sure the flag was created correctly
+# 
+FLAG_DATA=$(curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/flags/'${LD_PROJECT_KEY}'/updated-billing-ui' \
+  -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'')
+
+
+# 
+# Make sure the code was added properly
+# 
+cd /opt/ld/talkin-ship-workshop-app/src/components
+
+LINE1=`grep -n '^.\s*updatedBillingUi ?.*$' inventory.tsx | awk '{print $1;}' | cut -b -3`
+if [ "$LINE1" != "132" ]; then
+    fail-message "You must replace lines 131-138 in '/src/components/inventory.tsx' with the code supplied."
+    exit 1
+fi
+
+exit 0

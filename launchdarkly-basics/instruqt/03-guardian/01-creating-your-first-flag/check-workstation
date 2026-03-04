@@ -1,0 +1,14 @@
+#!/bin/sh
+
+FLAG_DATA=$(curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/flags/'${LD_PROJECT_KEY}'/release-updated-storefront' \
+  -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'' | jq -r .name)
+
+if [ "$FLAG_DATA" -eq "null" ]; then
+    fail-message "Uh-oh! It doesn't look like the flag was created per the instructions! Please review the instructions and create the flag as directed."
+    exit 1
+fi
+
+exit 0
+
+

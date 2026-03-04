@@ -1,0 +1,11 @@
+#!/bin/sh
+
+FLAG_PREREQ=`curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/flags/'$LD_PROJECT_KEY'/updated-billing-ui' \
+  -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN | jq -r '.environments.test.prerequisites[0].key'`
+
+if [ "$FLAG_PREREQ" != "migrate-to-stripe-api" ]; then
+    echo "The flag prerequisite was not set properly for the **Updated Billing UI** flag. Please review the instructions to set it up properly."
+fi
+
+exit 0

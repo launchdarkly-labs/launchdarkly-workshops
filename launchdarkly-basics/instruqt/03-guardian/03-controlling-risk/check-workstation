@@ -1,0 +1,57 @@
+#!/bin/bash
+#
+# This script runs when the platform check the challenge.
+#
+# The platform determines if the script was successful using the exit code of this
+# script. If the exit code is not 0, the script fails. 
+#
+
+# 
+# Make sure the segment was created 
+# The API call returns an emtpy response if the segment does not exist
+# 
+SEGMENT=`curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/segments/'$LD_PROJECT_KEY'/test/developers' \
+  -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN`
+
+if [ -z "$SEGMENT" ]; then
+  fail-message "The segment has not been created. Please create the segment using the instructions provided."
+  exit 1
+fi
+
+# 
+# Make sure the users were added to the segment correctly
+# 
+USERS_LIST=" ron leslie april andy "
+USER_PASS="true"
+while read i; do
+    if [[ "$USERS_LIST" != *" $i "* ]]; then
+        echo $i
+        USER_PASS="false"
+    fi
+done < <(echo $SEGMENT | jq -r -c '.rules[0].clauses[0].values[]')
+
+if [ "$USER_PASS" == "false" ]; then
+    fail-message "Please make sure the users in the Developers segment match the following:\n\n* ron\n* leslie\n* april\n* andy\n"
+    exit 1
+fi
+
+FLAGKEY_LIST=" release-updated-storefront "
+
+while read i; do
+  if [[ "$FLAGKEY_LIST" != *" $i "* ]]; then
+    echo "Please make sure to add the Developers segment to the flag's targeting rules."
+    exit 1
+  fi
+done < <(echo $SEGMENT | jq -r -c '._flags[].key')
+
+FLAG_DEFAULT=`curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/flags/'$LD_PROJECT_KEY'/release-updated-storefront' \
+  -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN | jq '.environments["test"].fallthrough.variation'`
+
+if [ "$FLAG_DEFAULT" == "0" ]; then
+  fail-message "The flag default value needs to be set to **Store Disabled**"
+  exit 1
+fi
+
+exit 0

@@ -1,0 +1,38 @@
+slug: guard-every-software-release-v2
+id: cvnm4pvjvsii
+title: Guard Every Software Release (Q4 2025)
+teaser: Release features with little to no risk
+description: |-
+  Releases always carry some risk, but why does it need to
+  be anything more than negligible? In this workshop, you'll
+  learn how your releases can not only carry little to no
+  risk, but also learn how to take ultimate control over
+  your releases to give you confidence with every new feature!
+icon: https://launchdarkly.com/favicon-dark-mode.png
+tags:
+- release
+- migrate
+owner: launchdarkly
+developers:
+- kcochran@launchdarkly.com
+- nteixeira@launchdarkly.com
+- akhattak@launchdarkly.com
+- gyeutter@launchdarkly.com
+show_timer: true
+skipping_enabled: true
+idle_timeout: 1200
+timelimit: 9000
+lab_config:
+  extend_ttl: 1200
+  sidebar_enabled: true
+  feedback_recap_enabled: true
+  feedback_tab_enabled: false
+  loadingMessages: true
+  theme:
+    name: modern-dark
+  override_challenge_layout: false
+  hideStopButton: false
+  default_layout: AssignmentRight
+  default_layout_sidebar_size: 25
+checksum: "10940003410884429465"
+enhanced_loading: false

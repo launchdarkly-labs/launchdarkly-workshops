@@ -1,0 +1,20 @@
+{
+    "environmentKey": "test",
+    "instructions": [
+        {
+            "clauses": [
+                {
+                    "attribute": "segmentMatch",
+                    "op": "segmentMatch",
+                    "contextKind": "",
+                    "values": [
+                        "developers"
+                    ],
+                    "negate": false
+                }
+            ],
+            "kind": "addRule",
+            "variationId": "'${UBUI_VARID}'"
+        }
+    ]
+}

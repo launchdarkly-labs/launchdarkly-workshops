@@ -10,7 +10,6 @@ echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.co
 wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /etc/apt/keyrings/hashicorp-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 apt-get -y update
-apt-get -y autoremove
 apt-get -y install unzip jq git curl gnupg ca-certificates terraform vim
 
 # Cleanup and install NodeJS
@@ -21,33 +20,22 @@ npm install -g npm@latest
 # Install C++ tools
 ######################
 
-apt-get install -y gcc g++ cmake libjsoncpp-dev uuid-dev zlib1g-dev openssl libssl-dev libpthread-stubs0-dev
+apt install -y build-essential cmake openssl libc6-dev libpthread-stubs0-dev libboost-all-dev libjsoncpp-dev uuid-dev zlib1g-dev libssl-dev
 
 ln -s /usr/include/jsoncpp/json/ /usr/include/json
 
 # Install Drogon
+# *** this takes some time to build
 mkdir -p /opt/tools
 cd /opt/tools
-git clone https://github.com/drogonframework/drogon.git
+git clone https://github.com/drogonframework/drogon
 cd drogon
 git submodule update --init
 mkdir build
 cd build
 cmake ..
-make && make install
-
-# Install Boost
-wget -O boost.tar.gz https://boostorg.jfrog.io/artifactory/main/release/1.82.0/source/boost_1_82_0.tar.gz
-tar -C /usr/local -xzf boost.tar.gz
-rm boost.tar.gz
-echo "export BOOST_ROOT=\"/usr/local/boost_1_82_0\"" >> ~/.profile
-echo "export BOOST_ROOT=\"/usr/local/boost_1_82_0\"" >> ~/.bashrc
-export BOOST_ROOT="/usr/local/boost_1_82_0"
-mv /usr/include/boost /usr/include/boost_old
-cp -R /usr/local/boost_1_82_0/boost /usr/include/
-cd /usr/local/boost_1_82_0
-./bootstrap.sh
-./b2 install
+make && sudo make install
+cd ../..
 
 # Install LaunchDarkly Sample App
 mkdir -p /opt/cpp
@@ -56,19 +44,23 @@ git clone https://github.com/launchdarkly-labs/ld-sample-app-cpp.git
 cd ld-sample-app-cpp
 
 # Install LaunchDarkly SDK
+rm -rf cpp-sdks
+git clone https://github.com/launchdarkly/cpp-sdks.git
 cd cpp-sdks
-mkdir build
-cd build
+mkdir build && cd build
 cmake ..
 cmake --build .
 cmake --install .
-cd ..
+cd ../..
+mkdir build && cd build
+cmake ..
+cmake --build .
 
 # Build sample app
-mkdir build
-cd build
-cmake -D LD_BUILD_UNIT_TESTS=OFF ..
-cmake --build .
+# mkdir build
+# cd build
+# cmake -D LD_BUILD_UNIT_TESTS=OFF ..
+# cmake --build .
 
 
 ######################
@@ -76,7 +68,7 @@ cmake --build .
 # clone the Terraform code to generate user
 mkdir -p /opt/ld
 cd /opt/ld
-git clone https://github.com/kevincloud/terraform-ld-student.git
+git clone https://github.com/launchdarkly-labs/terraform-ld-student.git
 cd /opt/ld/terraform-ld-student
 terraform init
 
@@ -123,7 +115,6 @@ terraform {
   required_providers {
     launchdarkly = {
       source  = "launchdarkly/launchdarkly"
-      version = "~>2.15"
     }
   }
 }
@@ -153,11 +144,6 @@ resource "launchdarkly_feature_flag" "release_storefront_flag" {
   client_side_availability {
     using_environment_id = true
     using_mobile_key     = false
-  }
-
-  defaults {
-    on_variation  = 0
-    off_variation = 1
   }
 
   tags = [

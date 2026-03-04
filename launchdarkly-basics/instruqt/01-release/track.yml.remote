@@ -1,0 +1,35 @@
+slug: risk-free-releases
+id: apk1xxhtw40m
+title: Z_De-Risk Releases
+teaser: Release features and migrate with little to no risk
+description: |-
+  Releases always carry some risk, but why does it need to
+  be anything more than negligible? In this track, you'll
+  learn how your releases can not only carry little to no
+  risk, but you'll learn how having ultimate control over
+  your releases will give you and your customers confidence
+  with every new feature!
+icon: https://launchdarkly.com/favicon-dark-mode.png
+tags:
+- archive
+owner: launchdarkly
+developers:
+- kcochran@launchdarkly.com
+maintenance: true
+show_timer: true
+idle_timeout: 600
+timelimit: 7200
+lab_config:
+  extend_ttl: 3600
+  sidebar_enabled: true
+  feedback_recap_enabled: true
+  feedback_tab_enabled: false
+  loadingMessages: true
+  theme:
+    name: modern-dark
+  override_challenge_layout: false
+  hideStopButton: false
+  default_layout: AssignmentRight
+  default_layout_sidebar_size: 25
+checksum: "1809614888915969974"
+enhanced_loading: false

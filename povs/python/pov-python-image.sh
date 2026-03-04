@@ -13,22 +13,20 @@ apt-get -y update
 
 # Install tools
 mkdir -p /etc/apt/keyrings
-curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
-wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /etc/apt/keyrings/hashicorp-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | tee /etc/apt/sources.list.d/hashicorp.list
 apt-get -y update
-apt-get -y autoremove
 apt-get -y install unzip jq git curl gnupg ca-certificates terraform vim
 
 # Cleanup and install NodeJS
-apt-get install -y nodejs
-npm install -g npm@latest
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+\. "$HOME/.nvm/nvm.sh"
+nvm install 24
 
 # Install Python
-apt-get -y install pip
 ln -s /usr/bin/python3 /usr/bin/python
-pip install launchdarkly-server-sdk flask flask_cors
+apt-get -y install python3-venv python3-flask python3-flask-cors python3-pip python3-dotenv
+pip install launchdarkly-server-sdk --break-system-packages
 
 # Install Python App
 ######################
@@ -57,6 +55,7 @@ cat > /root/.local/share/code-server/User/settings.json <<-EOF
 }
 EOF
 
+cd /root
 curl -fsSL https://code-server.dev/install.sh | sh
 
 # Create Code Server startup script

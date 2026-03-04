@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# This script runs when the platform setup the challenge.
+#
+# The platform determines if the script was successful using the exit code of this
+# script. If the exit code is not 0, the script fails. 
+#
+
+curl -s -X POST \
+  'https://app.launchdarkly.com/api/v2/flags/'${LD_PROJECT_KEY}'' \
+  -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "key": "guarded-rollout-feature",
+    "name": "Guarded Rollout Feature",
+    "variations": [
+      {
+        "value": true,
+        "name": "Available"
+      },
+      {
+        "value": false,
+        "name": "Unavailable"
+      }
+    ],
+    "clientSideAvailability": {
+      "usingEnvironmentId": true,
+      "usingMobileKey": true
+    },
+    "defaults": {
+      "onVariation": 1,
+      "offVariation": 1
+    }
+  }'
+
+exit 0

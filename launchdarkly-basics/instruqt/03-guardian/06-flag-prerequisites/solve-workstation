@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# 
+# Get variation IDs for a flag
+# 
+
+VAR_ID=$(curl -s -X GET \
+    'https://app.launchdarkly.com/api/v2/flags/'$LD_PROJECT_KEY'/migrate-to-stripe-api' \
+  -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN'' \
+  -H 'Content-Type: application/json' | jq -r '.variations[0]._id')
+
+# 
+# Add a prerequisite to the flag
+# 
+curl -s -X PATCH \
+  'https://app.launchdarkly.com/api/v2/flags/'$LD_PROJECT_KEY'/updated-billing-ui' \
+  -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN'' \
+  -H 'Content-Type: application/json; domain-model=launchdarkly.semanticpatch' \
+  -d '{
+        "environmentKey": "test",
+        "instructions": [{
+                "kind": "addPrerequisite",
+                "key": "migrate-to-stripe-api",
+                "variationId": "'$VAR_ID'"
+        }]
+    }'
+
+
+exit 0

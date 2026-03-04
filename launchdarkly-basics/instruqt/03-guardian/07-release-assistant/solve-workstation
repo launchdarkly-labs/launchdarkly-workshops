@@ -1,0 +1,65 @@
+#!/bin/sh
+#
+# This script runs when the platform solve the challenge.
+#
+# The platform determines if the script was successful using the exit code of this
+# script. If the exit code is not 0, the script fails. 
+#
+
+curl -i -X POST \
+  'https://app.launchdarkly.com/api/v2/projects/'${LD_PROJECT_KEY}'/release-pipelines' \
+  -H 'Authorization: '${LAUNCHDARKLY_ACCESS_TOKEN}'' \
+  -H 'Content-Type: application/json' \
+  -H 'LD-API-Version: beta' \
+  -d '{
+    "description": "Default pipeline to roll out to production",
+    "key": "default-pipeline",
+    "name": "Default Pipeline",
+    "phases": [
+      {
+        "audiences": [
+          {
+            "environmentKey": "test",
+            "name": "segments",
+            "segmentKeys": [
+              "developers"
+            ],
+            "configuration": {
+              "releaseStrategy": "immediate-rollout",
+              "requireApproval": false,
+            }
+          }
+        ],
+        "name": "Testing Phase"
+      },
+      {
+        "audiences": [
+          {
+            "environmentKey": "qa",
+            "name": "everyone",
+            "configuration": {
+              "releaseStrategy": "immediate-rollout",
+              "requireApproval": false,
+            }
+          }
+        ],
+        "name": "QA Phase"
+      },
+      {
+        "audiences": [
+          {
+            "environmentKey": "production",
+            "name": "everyone",
+            "configuration": {
+              "releaseStrategy": "immediate-rollout",
+              "requireApproval": false,
+            }
+          }
+        ],
+        "name": "Production Phase"
+      }
+    ],
+    "isProjectDefault": true
+  }'
+
+exit 0

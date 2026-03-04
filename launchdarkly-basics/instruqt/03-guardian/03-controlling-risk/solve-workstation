@@ -1,0 +1,84 @@
+#!/bin/bash
+
+# 
+# Create the segment
+# 
+curl -s -X POST \
+  'https://app.launchdarkly.com/api/v2/segments/'$LD_PROJECT_KEY'/test' \
+  -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN'' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "key": "developers",
+    "name": "Developers"
+  }'
+
+
+# 
+# Add targeting to the segment
+# 
+curl -s -X PATCH \
+  'https://app.launchdarkly.com/api/v2/segments/'$LD_PROJECT_KEY'/test/developers' \
+  -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN'' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "patch":[
+      {
+        "op": "add",
+        "path": "/rules/0",
+        "value": {
+          "clauses": [{ "attribute": "name", "op": "in", "values": ["ron", "leslie", "april", "andy"] }]
+        }
+      }
+    ]
+  }'
+
+
+# 
+# Change the flag default value
+# 
+curl -s -X PATCH \
+  'https://app.launchdarkly.com/api/v2/flags/'$LD_PROJECT_KEY'/release-updated-storefront' \
+  -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN'' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "patch": [
+      {
+        "op": "replace",
+        "path": "/environments/test/fallthrough/variation",
+        "value": 1
+      }
+    ]
+  }'
+
+# 
+# Get the flag ID for the true variation
+# 
+VAR_ID=$(curl -s -X GET \
+  'https://app.launchdarkly.com/api/v2/flags/'$LD_PROJECT_KEY'/release-updated-storefront' \
+  -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN'' | jq -r '.variations[0]._id')
+
+# 
+# Add the segment to the flag's targeting rules
+# 
+curl -s -X PATCH \
+  'https://app.launchdarkly.com/api/v2/flags/'$LD_PROJECT_KEY'/release-updated-storefront' \
+  -H 'Authorization: '$LAUNCHDARKLY_ACCESS_TOKEN'' \
+  -H 'Content-Type: application/json; domain-model=launchdarkly.semanticpatch' \
+  -d '{
+      "environmentKey": "test",
+      "instructions": [{
+          "kind": "addRule",
+          "variationId": "'$VAR_ID'",
+          "clauses": [{
+              "attribute": "segmentMatch",
+              "op": "segmentMatch",
+              "values": ["developers"]
+          }]
+      }]
+  }'
+
+
+exit 0
+
+
+
