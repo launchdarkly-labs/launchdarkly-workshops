@@ -1,0 +1,13 @@
+#!/bin/bash
+
+PREREQ=$(curl -s -X GET \
+  "https://app.launchdarkly.com/api/v2/flags/${LD_PROJECT_KEY}/coffee-promo-2" \
+  -H "Authorization: ${LAUNCHDARKLY_ACCESS_TOKEN}" \
+  | jq -r '.environments.test.prerequisites[0].key // empty')
+
+if [ "$PREREQ" != "coffee-promo-1" ]; then
+    fail-message "The prerequisite for 'coffee-promo-2' hasn't been set correctly. It should require 'coffee-promo-1' to be on. Please review the instructions."
+    exit 1
+fi
+
+exit 0

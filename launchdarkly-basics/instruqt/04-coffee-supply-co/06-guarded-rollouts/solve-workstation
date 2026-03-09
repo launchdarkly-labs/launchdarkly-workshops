@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Create latency metric
+curl -s -X POST \
+  "https://app.launchdarkly.com/api/v2/metrics/${LD_PROJECT_KEY}" \
+  -H "Authorization: ${LAUNCHDARKLY_ACCESS_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "key": "latency",
+    "name": "Latency",
+    "kind": "custom",
+    "isNumeric": true,
+    "unit": "ms",
+    "successCriteria": "LowerThanBaseline"
+  }' > /dev/null
+
+# Create error-rate metric
+curl -s -X POST \
+  "https://app.launchdarkly.com/api/v2/metrics/${LD_PROJECT_KEY}" \
+  -H "Authorization: ${LAUNCHDARKLY_ACCESS_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "key": "error-rate",
+    "name": "Error Rate",
+    "kind": "custom",
+    "isNumeric": false,
+    "successCriteria": "LowerThanBaseline"
+  }' > /dev/null
+
+exit 0

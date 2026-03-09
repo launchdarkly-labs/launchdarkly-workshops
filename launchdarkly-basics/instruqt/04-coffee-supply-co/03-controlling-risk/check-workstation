@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Verify the Developers segment was created
+SEGMENT=$(curl -s -X GET \
+  "https://app.launchdarkly.com/api/v2/segments/${LD_PROJECT_KEY}/test/developers" \
+  -H "Authorization: ${LAUNCHDARKLY_ACCESS_TOKEN}")
+
+if [ -z "$SEGMENT" ] || [ "$(echo "$SEGMENT" | jq -r '.key // empty')" = "" ]; then
+    fail-message "The 'Developers' segment hasn't been created. Please follow the instructions to create it."
+    exit 1
+fi
+
+# Verify the segment rule targets role=developer
+RULE_VALUE=$(echo "$SEGMENT" | jq -r '.rules[0].clauses[0].values[0] // empty')
+if [ "$RULE_VALUE" != "developer" ]; then
+    fail-message "The Developers segment rule should target users with role 'developer'. Please review the segment configuration."
+    exit 1
+fi
+
+# Verify the flag has the Developers segment in its targeting rules
+FLAG=$(curl -s -X GET \
+  "https://app.launchdarkly.com/api/v2/flags/${LD_PROJECT_KEY}/release-home-page-slider" \
+  -H "Authorization: ${LAUNCHDARKLY_ACCESS_TOKEN}")
+
+SEGMENT_IN_FLAG=$(echo "$FLAG" | jq -r '[.environments.test.rules[].clauses[].values[]] | map(select(. == "developers")) | length')
+if [ "$SEGMENT_IN_FLAG" = "0" ] || [ -z "$SEGMENT_IN_FLAG" ]; then
+    fail-message "The 'Developers' segment doesn't appear in the flag's targeting rules. Please add it following the instructions."
+    exit 1
+fi
+
+# Verify the default rule serves Slider Hidden (variation index 1)
+DEFAULT_VARIATION=$(echo "$FLAG" | jq -r '.environments.test.fallthrough.variation')
+if [ "$DEFAULT_VARIATION" != "1" ]; then
+    fail-message "The flag's default rule should serve 'Slider Hidden'. Please update it."
+    exit 1
+fi
+
+exit 0

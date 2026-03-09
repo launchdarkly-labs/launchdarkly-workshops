@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Create the Developers segment
+curl -s -X POST \
+  "https://app.launchdarkly.com/api/v2/segments/${LD_PROJECT_KEY}/test" \
+  -H "Authorization: ${LAUNCHDARKLY_ACCESS_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Developers",
+    "key": "developers",
+    "rules": [{
+      "clauses": [{
+        "contextKind": "user",
+        "attribute": "role",
+        "op": "in",
+        "values": ["developer"],
+        "negate": false
+      }]
+    }]
+  }' > /dev/null
+
+# Update the flag: add segment targeting rule, set default to Slider Hidden, turn on
+curl -s -X PATCH \
+  "https://app.launchdarkly.com/api/v2/flags/${LD_PROJECT_KEY}/release-home-page-slider" \
+  -H "Authorization: ${LAUNCHDARKLY_ACCESS_TOKEN}" \
+  -H "Content-Type: application/json; domain-model=launchdarkly.semanticpatch" \
+  -d '{
+    "environmentKey": "test",
+    "instructions": [
+      {"kind": "turnFlagOn"},
+      {
+        "kind": "addRule",
+        "clauses": [{
+          "contextKind": "user",
+          "attribute": "segmentMatch",
+          "op": "segmentMatch",
+          "values": ["developers"],
+          "negate": false
+        }],
+        "variation": 0
+      },
+      {"kind": "updateFallthroughVariationOrRollout", "variation": 1}
+    ]
+  }' > /dev/null
+
+exit 0

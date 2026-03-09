@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Create the brand-new-rollout-feature flag if it does not already exist
+FLAG_KEY=$(curl -s -X GET \
+  "https://app.launchdarkly.com/api/v2/flags/${LD_PROJECT_KEY}/brand-new-rollout-feature" \
+  -H "Authorization: ${LAUNCHDARKLY_ACCESS_TOKEN}" | jq -r '.key // empty')
+
+if [ -z "$FLAG_KEY" ]; then
+    curl -s -X POST \
+      "https://app.launchdarkly.com/api/v2/flags/${LD_PROJECT_KEY}" \
+      -H "Authorization: ${LAUNCHDARKLY_ACCESS_TOKEN}" \
+      -H "Content-Type: application/json" \
+      -d '{
+        "name": "Brand New Rollout Feature",
+        "key": "brand-new-rollout-feature",
+        "variations": [
+          {"value": true, "name": "Available"},
+          {"value": false, "name": "Unavailable"}
+        ],
+        "defaults": {"onVariation": 0, "offVariation": 1}
+      }' > /dev/null
+fi
+
+exit 0

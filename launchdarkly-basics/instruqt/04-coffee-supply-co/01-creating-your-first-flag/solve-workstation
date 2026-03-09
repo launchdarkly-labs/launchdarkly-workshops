@@ -1,0 +1,17 @@
+#!/bin/bash
+
+curl -s -X POST \
+  "https://app.launchdarkly.com/api/v2/flags/${LD_PROJECT_KEY}" \
+  -H "Authorization: ${LAUNCHDARKLY_ACCESS_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Release Home Page Slider",
+    "key": "release-home-page-slider",
+    "variations": [
+      {"value": true, "name": "Slider Visible"},
+      {"value": false, "name": "Slider Hidden"}
+    ],
+    "defaults": {"onVariation": 0, "offVariation": 1}
+  }' > /dev/null
+
+exit 0

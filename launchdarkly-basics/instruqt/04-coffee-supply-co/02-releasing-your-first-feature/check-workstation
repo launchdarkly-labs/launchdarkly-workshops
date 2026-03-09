@@ -1,0 +1,15 @@
+#!/bin/bash
+
+APP_JS=/opt/ld/ld-sample-app-node/app.js
+
+if ! grep -q 'release-home-page-slider' "$APP_JS"; then
+    fail-message "The flag 'release-home-page-slider' doesn't appear in app.js. Make sure you added the ldclient.variation() call to the home route."
+    exit 1
+fi
+
+if ! grep -q 'homePageSlider' "$APP_JS"; then
+    fail-message "The 'homePageSlider' variable doesn't appear to be passed to the template. Make sure you updated the res.render() call."
+    exit 1
+fi
+
+exit 0

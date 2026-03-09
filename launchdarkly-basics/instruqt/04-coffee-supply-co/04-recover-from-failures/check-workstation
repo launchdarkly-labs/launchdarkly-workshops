@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Verify coffee-promo-1 flag exists
+FLAG1=$(curl -s -X GET \
+  "https://app.launchdarkly.com/api/v2/flags/${LD_PROJECT_KEY}/coffee-promo-1" \
+  -H "Authorization: ${LAUNCHDARKLY_ACCESS_TOKEN}" | jq -r '.key // empty')
+
+if [ -z "$FLAG1" ]; then
+    fail-message "The 'coffee-promo-1' flag doesn't exist. Please create it in LaunchDarkly."
+    exit 1
+fi
+
+# Verify coffee-promo-2 flag exists
+FLAG2=$(curl -s -X GET \
+  "https://app.launchdarkly.com/api/v2/flags/${LD_PROJECT_KEY}/coffee-promo-2" \
+  -H "Authorization: ${LAUNCHDARKLY_ACCESS_TOKEN}" | jq -r '.key // empty')
+
+if [ -z "$FLAG2" ]; then
+    fail-message "The 'coffee-promo-2' flag doesn't exist. Please create it in LaunchDarkly."
+    exit 1
+fi
+
+# Verify the code was updated
+APP_JS=/opt/ld/ld-sample-app-node/app.js
+
+if ! grep -q 'coffee-promo-1' "$APP_JS"; then
+    fail-message "The flag 'coffee-promo-1' doesn't appear in app.js. Please add the variation call to the home route."
+    exit 1
+fi
+
+if ! grep -q 'coffee-promo-2' "$APP_JS"; then
+    fail-message "The flag 'coffee-promo-2' doesn't appear in app.js. Please add both promo flags to the home route."
+    exit 1
+fi
+
+exit 0

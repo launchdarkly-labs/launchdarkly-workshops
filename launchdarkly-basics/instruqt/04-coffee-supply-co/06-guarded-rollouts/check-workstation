@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Verify both metrics were created
+LATENCY=$(curl -s -X GET \
+  "https://app.launchdarkly.com/api/v2/metrics/${LD_PROJECT_KEY}/latency" \
+  -H "Authorization: ${LAUNCHDARKLY_ACCESS_TOKEN}" | jq -r '.key // empty')
+
+if [ -z "$LATENCY" ]; then
+    fail-message "The 'latency' metric doesn't appear to exist. Please create it following the instructions."
+    exit 1
+fi
+
+ERROR_RATE=$(curl -s -X GET \
+  "https://app.launchdarkly.com/api/v2/metrics/${LD_PROJECT_KEY}/error-rate" \
+  -H "Authorization: ${LAUNCHDARKLY_ACCESS_TOKEN}" | jq -r '.key // empty')
+
+if [ -z "$ERROR_RATE" ]; then
+    fail-message "The 'error-rate' metric doesn't appear to exist. Please create it following the instructions."
+    exit 1
+fi
+
+exit 0

@@ -1,0 +1,34 @@
+slug: feature-flags-with-coffee-supply-co
+id: nv479jzzmxar
+title: X_Feature Flags with Coffee Supply Co.
+teaser: Build confidence in every release with LaunchDarkly feature flags
+description: |-
+  In this workshop, you'll learn how to use LaunchDarkly feature flags to
+  safely release new features, target specific users, recover quickly from
+  failures, enforce flag dependencies, and automate rollback when metrics
+  regress. You'll work with a real Node.js application — Coffee Supply Co.
+icon: https://launchdarkly.com/favicon-dark-mode.png
+tags:
+- release
+- feature-flags
+owner: launchdarkly
+developers:
+- kcochran@launchdarkly.com
+show_timer: true
+skipping_enabled: true
+idle_timeout: 1200
+timelimit: 9000
+lab_config:
+  extend_ttl: 1200
+  sidebar_enabled: true
+  feedback_recap_enabled: true
+  feedback_tab_enabled: false
+  loadingMessages: true
+  theme:
+    name: modern-dark
+  override_challenge_layout: false
+  hideStopButton: false
+  default_layout: AssignmentRight
+  default_layout_sidebar_size: 25
+checksum: "9611173510689558856"
+enhanced_loading: false

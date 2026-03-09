@@ -1,0 +1,16 @@
+#!/bin/bash
+
+curl -s -X PATCH \
+  "https://app.launchdarkly.com/api/v2/flags/${LD_PROJECT_KEY}/coffee-promo-2" \
+  -H "Authorization: ${LAUNCHDARKLY_ACCESS_TOKEN}" \
+  -H "Content-Type: application/json; domain-model=launchdarkly.semanticpatch" \
+  -d '{
+    "environmentKey": "test",
+    "instructions": [{
+      "kind": "addPrerequisite",
+      "key": "coffee-promo-1",
+      "variation": 0
+    }]
+  }' > /dev/null
+
+exit 0

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+FLAG_NAME=$(curl -s -X GET \
+  "https://app.launchdarkly.com/api/v2/flags/${LD_PROJECT_KEY}/release-home-page-slider" \
+  -H "Authorization: ${LAUNCHDARKLY_ACCESS_TOKEN}" | jq -r '.name // empty')
+
+if [ -z "$FLAG_NAME" ] || [ "$FLAG_NAME" = "null" ]; then
+    fail-message "The 'release-home-page-slider' flag doesn't appear to exist. Please create it following the instructions."
+    exit 1
+fi
+
+exit 0
